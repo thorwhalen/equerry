@@ -5,7 +5,7 @@ Three records per team. The roster is design and lives with the letter; the two 
 | File | Where | Written | One entry per |
 |---|---|---|---|
 | `roster.yaml` | `<Teams>/<team>/roster.yaml` | edited in place by the distil and review steps | primitive the team uses, its own or borrowed |
-| `growth.jsonl` | `<Team records>/<team>/growth.jsonl` | append-only | train, hire, retire, merge or quarantine event |
+| `growth.jsonl` | `<Team records>/<team>/growth.jsonl` | append-only | train, hire, retire, merge, quarantine or tool change; the brief lists every line since the last brief |
 | `coverage.jsonl` | `<Team records>/<team>/coverage.jsonl` | append-only | ask, plus one outcome line when the principal reacts |
 
 The log files are created by their first append, never pre-created. A missing file means "no entries yet".
@@ -24,9 +24,9 @@ A YAML list. Field by field:
 | `origin` | `human`, `agent`, `imported` |
 | `origin_ask` | the coverage entry id or issue URL that caused it; `seed` for the first roster |
 | `created` | ISO date |
-| `last_validated` | `{date, model, pass, baseline}`: the last G4 or G6 run, the model that ran it, its pass rate and the without-primitive baseline; `null` until first run (a human-seeded primitive is then validated per ask by the checker against its named checklist) |
+| `last_validated` | `{date, model, pass, baseline}`: the last G4 or G6 run, the model that ran it, its pass rate and the without-primitive baseline; `null` until one runs (a primitive is then validated per ask by the checker against its named checklist) |
 | `evals` | the path to its eval cases (`<Teams>/<team>/evals/<name>.json` for an admitted primitive; the domain skill's `references/evals.json` seed set for the lead and the domain skill), or `none` |
-| `permissions` | the tool names it needs, `Bash` only as command patterns (`Bash(<command>:*)`); compared with the letter's `permissions_ceiling` |
+| `permissions` | the tool names it needs, `Bash` only as command patterns (`Bash(<command>:*)`), so what it may run is visible to G3 and to a reader |
 | `status` | `proposed`, `active`, `quarantined`, `retired` |
 | `author_model` | the model that wrote it (`claude-opus-...`), or `null` for a primitive a person wrote; a primitive distilled by a lead always has one, so a later review can tell what a model wrote about itself |
 | `sources` | the dated sources and the evidence it was distilled from (paths, URLs, the coverage ids), or `[]` |
@@ -67,8 +67,8 @@ One line per ask, written by the calling session at step 10 (when the verdict, t
 | `authority` | the letter's right that applied (may decide, recommends, agree, never) and whether the escalation line was crossed |
 | `primitives_used` | list of roster ids |
 | `similar` | the coverage ids of earlier similar asks, as the lead confirmed them; `[]` if none |
-| `candidate` | for every `covered-with-gaps` (whether the lead judged it so or G0 refused growth), what would have closed the gap, one line, from the lead's `Candidate` line; otherwise `null` |
-| `cost` | `{"agent_calls": <n>, "tokens": <n or null>}` spent on this ask; summed against the letter's `cost_budget` |
+| `candidate` | for every `covered-with-gaps` (whether the lead judged it so or the session chose not to grow at step 4), what would have closed the gap, one line, from the lead's `Candidate` line; otherwise `null` |
+| `cost` | `{"agent_calls": <n>, "tokens": <n or null>}` spent on this ask; the brief sums the week's lines for token pacing (there is no budget) |
 
 ```json
 {"id": "legal-20261110-0915", "when": "2026-11-10T09:15", "team": "legal", "ask": "Does the standard client agreement keep background IP with the studio?", "verdict": "covered-with-gaps", "procedure": "equerry-legal contract-register checklist", "quality": [{"check": "checker: equerry-legal checklists.md#contract-register", "pass": 7, "total": 7}, {"check": "test: clause list matches the template", "pass": 1, "total": 1}], "knowledge": "no reference on background-IP clauses; two sources found, dated 2026-11-10", "context": "venture page studio: agreement template linked", "authority": "recommends; escalation line not crossed", "primitives_used": ["legal/contract-register"], "similar": ["legal-20261021-1402"], "candidate": "reference: background-IP clause patterns", "cost": {"agent_calls": 2, "tokens": null}}
@@ -82,26 +82,26 @@ One line per ask, written by the calling session at step 10 (when the verdict, t
 
 ## Growth log
 
-One line per event. A proposal produces a `proposed` line when it is written to `proposed/` and a second line when it is admitted, rejected or withdrawn. Keys, in this order:
+One line per event, written by the calling session when it decides; nobody approves it. An instance primitive produces one `admitted` line; a mechanic produces a `proposed` line with its pull request and a second line when the PR lands (`admitted`) or is closed (`withdrawn`). Keys, in this order:
 
 | Field | Meaning |
 |---|---|
 | `when` | ISO date and time |
 | `team` | the team |
-| `kind` | `train`, `hire`, `retire`, `merge`, `quarantine` |
+| `kind` | `train`, `hire`, `retire`, `merge`, `quarantine`, `tools` (a lasting change to a lead's tools) |
 | `primitive` | the roster id |
 | `class` | `mechanic` or `instance` |
 | `from_version`, `to_version` | `null` and `"1"` for a hire; the old and new versions for a train |
 | `ask` | the ask that caused it: its id and one line |
 | `coverage_ref` | the coverage entry id |
 | `evidence` | where the checked deliverable is (a path, a published page, an issue) |
-| `gates` | each gate's result and numbers, `{"G0": "pass: third similar ask", "G2": "pass", "G4": "0.9 vs 0.6", "G5": "pending <issue url>"}` |
+| `gates` | each check's result and numbers, `{"G0": "about 12 agent calls", "G1": "pass", "G2": "pass", "G4": "0.9 vs 0.6"}`; a check not run is left out |
 | `status` | `proposed`, `admitted`, `rejected`, `withdrawn`, `retired`, `quarantined` |
-| `approved_by` | `gate` (instance primitives without G5), `principal (in session)` with the quoted message and its time, or `principal (desk comment)` with the comment URL; `null` while pending |
+| `decided_by` | `session` (the calling session, the default for everything), `pr <url>` for a mechanic (with the session that reviewed and landed it), or `principal` when the principal decided it themselves |
 | `cost` | `{"agent_calls": <n>, "tokens": <n or null>, "minutes": <n>}` spent growing (checker eval writing and G4 runs included) |
 
 ```json
-{"when": "2026-11-10T10:05", "team": "legal", "kind": "train", "primitive": "legal/contract-register", "class": "mechanic", "from_version": "1", "to_version": "2", "ask": "legal-20261110-0915: background IP in the client agreement", "coverage_ref": "legal-20261110-0915", "evidence": "teams/legal/proposed/contract-register-v2/proposal.md", "gates": {"G0": "pass: third similar ask (legal-20261021-1402, legal-20261104-1130)", "G1": "pass", "G2": "pass", "G4": "pending", "G5": "pending"}, "status": "proposed", "approved_by": null, "cost": {"agent_calls": 3, "tokens": null, "minutes": 12}}
+{"when": "2026-11-10T10:05", "team": "legal", "kind": "train", "primitive": "legal/contract-register", "class": "mechanic", "from_version": "1", "to_version": "2", "ask": "legal-20261110-0915: background IP in the client agreement", "coverage_ref": "legal-20261110-0915", "evidence": "teams/legal/proposed/contract-register-v2/proposal.md", "gates": {"G0": "small: a section delta", "G1": "pass", "G2": "pass"}, "status": "proposed", "decided_by": "pr https://github.com/<owner>/<framework>/pull/<n>", "cost": {"agent_calls": 3, "tokens": null, "minutes": 12}}
 ```
 
 ## Primitive frontmatter
@@ -114,7 +114,7 @@ metadata: {equerry: {team: legal, class: mechanic, origin: agent, origin_ask: "l
 
 `author_model` and `sources` are required when `origin: agent` and optional for a primitive a person wrote.
 
-`team: all` marks a primitive shared by every team (the protocol, council and review skills); changing one is a change to a shared mechanic and needs G5. A reference or checklist file that has no frontmatter records the same facts in its roster entry only.
+`team: all` marks a primitive shared by every team (the protocol, council and review skills); changing one is a change to a shared mechanic, so a pull request to the framework. A reference or checklist file that has no frontmatter records the same facts in its roster entry only.
 
 ## The false-coverage rate
 
@@ -132,4 +132,4 @@ print(f"covered with outcome: {len(cov)}, rejected: {rej}, revised: {rev}, false
 EOF
 ```
 
-A rising rate means the lead is judging from its own sense of competence; the team review then tightens what counts as `covered` for that team.
+A rising rate means the lead is judging from its own sense of competence; it is a reason to run the team review, which tightens what counts as `covered` for that team.

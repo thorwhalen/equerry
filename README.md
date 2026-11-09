@@ -26,20 +26,20 @@ The desk's one record (the item, its states, verbs and event log) is specified i
 
 ## Teams
 
-Domain work (legal, finance, people, bizdev, marketing, product, engineering, ventures) is done by **teams**: one experienced generalist lead per domain, modelled on a fractional executive, working under a written engagement letter, judging coverage from artefacts before acting, and growing its skills only from checked work through gates. The design is in [docs/teams.md](docs/teams.md). Everything is agent skills and sub-agent files under `.claude/`; there is no code.
+Domain work (legal, finance, people, bizdev, marketing, product, engineering, ventures) is done by **teams**: one experienced generalist lead per domain, modelled on a fractional executive, working under a written engagement letter, judging coverage from artefacts before acting, and growing its skills only from checked work, decided by the calling session with no approval step (the teams are agents: no growth budget, nothing to sign; only the consent table's `ask_first` classes wait for the principal). The design is in [docs/teams.md](docs/teams.md). Everything is agent skills and sub-agent files under `.claude/`; there is no code.
 
 | Kind | Name | What it does |
 |---|---|---|
-| Skill | `equerry-team` | the calling session's protocol: frame, assess, act, verify, distil, gate; the letter, roster, log and gate formats; templates |
+| Skill | `equerry-team` | the calling session's protocol: frame, assess, act, verify, distil; the letter, roster, log and check formats; templates |
 | Skill | `equerry-lead` | the lead's side, preloaded by every lead: what it reads, what it returns per verdict, the reply shape, how it proposes a primitive as text |
 | Skill | `equerry-council` | several leads on one question, the contradictor always, disagreements kept |
-| Skill | `equerry-team-review` | monthly per team: recurring gaps, unused primitives, false-coverage rate, retirements |
+| Skill | `equerry-team-review` | optional, when the brief shows a team struggling or on request: recurring gaps, unused or harmful primitives, false-coverage rate, pruning |
 | Skill | `equerry-secretary` | the front desk, on demand: a ranked, capped brief of what needs the principal; "remind me of X" as a desk item; routing an ask to a team |
 | Skills | `equerry-<team>` | each domain's playbook: recurring tasks, escalation line, checklists, dated sources |
-| Agents | `<team>-lead` | the eight leads; tools Read, Grep, Glob, WebSearch and WebFetch only: no shell, no write tool, so the calling session runs every command and writes every file |
+| Agents | `<team>-lead` | the eight leads; default tools Read, Grep, Glob, WebSearch and WebFetch: no shell, no write tool, so the calling session runs every command and writes every file (it may give a lead more for one ask) |
 | Agents | `contradictor`, `checker`, `navigator` | shared staff: find what does not hold; verify against a checklist; know which tools already exist |
 
-A host turns teams on with a `## equerry` block in its `CLAUDE.md`: six lines (where letters, logs, the dossier, venture pages, the navigator and the desk live, with the principal's login for approvals) plus an optional `Fleet map:` line for the navigator; the secretary adds `Brief sources:` and `Briefs:`. See `docs/teams.md`, "Seams". The leads are registered agents when the session starts in the host directory, whose `.claude/agents/` links to this repository's; from anywhere else the calling session inlines them (`equerry-team`).
+A host turns teams on with a `## equerry` block in its `CLAUDE.md`: six lines (where letters, logs, the dossier, venture pages, the navigator and the desk live) plus an optional `Fleet map:` line for the navigator; the secretary adds `Brief sources:` and `Briefs:`. See `docs/teams.md`, "Seams". The leads are registered agents when the session starts in the host directory, whose `.claude/agents/` links to this repository's; from anywhere else the calling session inlines them (`equerry-team`).
 
 ## Relation to its siblings
 

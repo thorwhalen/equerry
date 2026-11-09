@@ -107,5 +107,5 @@ Teams: all.
 - [ ] [legal] [finance] next year's statutory and tax calendar generated from the two teams' `references/calendar.md` and the venture pages; the admin estate's yearly renewals listed
 - [ ] [ventures] every venture page reviewed; kill signals and review dates renewed; time budgets reset with the principal
 - [ ] [people] people register reviewed; agreements up for yearly review listed; the principal's facts past review listed
-- [ ] every team: engagement letter re-read; `review_by` renewed or the letter paused
+- [ ] every team: engagement letter re-read where it no longer fits (its optional `review_suggested` date is a hint); edit it or pause it
 - [ ] every team: `equerry-team-review` run, with the year's false-coverage rate

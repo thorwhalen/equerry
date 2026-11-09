@@ -1,6 +1,6 @@
 # The engagement letter
 
-The contract between the principal and one team, modelled on a fractional executive's engagement: a mandate, deliverables with a cadence, written decision rights, an out-of-scope list and the line where a licensed professional takes over. One per team, in the instance at `<Teams>/<team>/engagement.md`. **A team runs only under a letter that is `status: active`, carries a `signed` date and has a `review_by` date in the future**: the calling session checks all three before every ask (`equerry-team`, "Before step 1") and refuses the ask otherwise. A letter an agent drafted is `proposed` until the principal signs it.
+The contract between the principal and one team, modelled on a fractional executive's engagement: a mandate, deliverables with a cadence, written decision rights, an out-of-scope list and the line where a licensed professional takes over. One per team, in the instance at `<Teams>/<team>/engagement.md`. **A letter is active by being present**: there is nothing to sign, nothing to renew and no budget in it. The teams are agents, not hires; the principal: "No need for such formalism and bureaucracy. I want to be lean." A session may draft or edit a letter like any other instance file; the principal edits it whenever they disagree, and `status: paused` stops a team.
 
 Two failure modes the letter exists to prevent: a lead with accountability but no decision rights, and a lead with a "fix everything" scope. Both fail for human fractional executives and for agents alike.
 
@@ -12,14 +12,12 @@ Frontmatter (machine-read by the protocol), then a short body (read by the lead)
 |---|---|---|
 | `team` | yes | the team id: `legal`, `finance`, `people`, `bizdev`, `marketing`, `product`, `engineering`, `ventures` |
 | `lead` | yes | the lead sub-agent's name, normally `<team>-lead` |
-| `status` | yes | `active` (runs, once signed), `paused` (asks are refused with a one-line reason), `proposed` (written, not yet signed: does not run) |
-| `review_by` | yes | the date by which the principal re-reads and renews the letter; at most twelve months out, three to six is normal at the start. Past it, the team does not run |
-| `signed` | yes | `null` until the principal approves the letter; then the date and how (`desk item <url>` or `in person`). Only the principal sets it |
+| `status` | no | omit it; `paused` stops the team (the session answers asks with one line saying so) |
+| `review_suggested` | no | a date after which the team review suggests re-reading the letter; a hint, never a stop |
 | `jurisdictions` | yes | the jurisdictions whose rules the team applies, e.g. `[US, FR, EU]` (US with the state where it matters). The domain skills ship reference packs per jurisdiction label; a jurisdiction with no pack makes the knowledge dimension a gap |
-| `growth_budget` | yes | per calendar month, `{train: <n>, hire: <n>}`; G0 refuses growth beyond it. Default `{train: 3, hire: 1}` |
-| `cost_budget` | yes | per calendar month, `{agent_calls: <n>, tokens: <n or null>}`: every agent call the team's asks and growth spend (leads, checker, contradictor, navigator, G4 runs). G0 refuses growth past it. Default `{agent_calls: 60, tokens: null}` |
-| `skill_cap` | yes | the most active skills the team's roster may hold, the domain skill included; G1 turns a proposal past it into a train or a merge. Default `3` |
-| `permissions_ceiling` | yes | the tools no primitive of this team may exceed, with `Bash` written only as command patterns (`"Bash(python3 -c:*)"`, `"Bash(rg:*)"`), never bare, so a proposal can actually exceed it; G3 and G5 compare every proposal against it. Raising it is itself a G5 item. Default `[Read, Grep, Glob, WebSearch, WebFetch]` |
+| `consent` | no | a map that narrows the consent table for actions raised under this team, e.g. `{publish: "off"}`; it can never widen it |
+
+What a letter does not hold, on purpose: a growth or cost budget (token use is watched in the brief against the weekly allowance, not budgeted per team), a skill cap (the team review prunes), a permissions ceiling (a lead's default tools are in its agent file, and the calling session may add what one ask needs), a signature or an expiry.
 
 Body sections, each one paragraph, list or table:
 
@@ -39,7 +37,7 @@ Body sections, each one paragraph, list or table:
 
 ## The may-decide rule
 
-A lead may decide alone only an action the architecture's gate already lets through: **reversible by rule** (no spend, deletion, message to a person, public publication, merge outside the principal's own organisations, secret or account change) **and** low disagreement risk. In practice that leaves: choosing which sources to read, ordering its own work, choosing a checklist, drafting for the principal's own use, filing a desk item in the instance's own desk, proposing a primitive. Anything else goes under Recommends, including filing an issue in any other repository (a navigator's draft issue included): text born of a private ask needs the placement test and the principal's word before it leaves the instance.
+A lead may decide alone only an action the architecture's gate already lets through: **reversible by rule** (no spend, deletion, message to a person, public publication, merge outside the principal's own organisations, secret or account change) **and** low disagreement risk. In practice that leaves: choosing which sources to read, ordering its own work, choosing a checklist, drafting for the principal's own use, filing a desk item in the instance's own desk, proposing a primitive. Anything else goes under Recommends. Filing an issue in another repository (a navigator's draft issue included) is the calling session's action, not the lead's: text born of a private ask passes the placement test and the names grep first, and an issue on a repository with outside readers is the consent table's `message_person` class.
 
 Only two teams hold an **Agree** right (a veto the principal must resolve, never a decision): `legal` on privacy-legal one-way doors and `finance` on spend. Write each such right as a named class ("Agree: any new contract that assigns IP", "Agree: any recurring spend above <amount> a month"), never as a general power.
 
@@ -53,14 +51,8 @@ A fictional principal, Ada, who runs a small bookkeeping service and is building
 ---
 team: finance
 lead: finance-lead
-status: active
-review_by: 2027-03-01
-signed: 2026-11-12, desk item (Ada's tracker)
 jurisdictions: [US]
-growth_budget: {train: 3, hire: 1}
-cost_budget: {agent_calls: 60, tokens: null}
-skill_cap: 3
-permissions_ceiling: [Read, Grep, Glob, WebSearch, WebFetch, "Bash(python3 -c:*)"]
+review_suggested: 2027-03-01
 ---
 # Finance, tax and administration: engagement letter
 
@@ -96,4 +88,4 @@ References: the framework's `equerry-finance` skill; `teams/finance/references/`
 First task: price the app's per-vehicle monthly plan with a script whose inputs are visible. Accepted when the checker passes it against the offer-pricing checklist and Ada sets the price.
 ```
 
-What makes the example sound: every Never is a one-way door; the Agree right is a named class with a threshold; the escalation line names a profession and admits it is not yet a person; every cadence row names its trigger or says `on ask`; the ceiling allows Bash only as one command pattern; the first task has an acceptance line a checker can test.
+What makes the example sound: every Never is a one-way door; the Agree right is a named class with a threshold; the escalation line names a profession and admits it is not yet a person; every cadence row names its trigger or says `on ask`; the first task has an acceptance line a checker can test; and nothing in it asks Ada to sign, renew or approve the team's own growth.

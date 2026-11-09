@@ -18,7 +18,7 @@ Writers: **raiser** (the producer that submitted it), **store** (the desk's writ
 | `state` | A2A state | yes | store, on a gate, verb, tick, receipt or raiser cause | `input-required` |
 | `band` | `decide` `unblock` `review` `reply` `deadline` `risk` `awareness` | no (`awareness`) | raiser; gate may correct by rule | `decide` |
 | `severity` | `interrupt` `today` `review` `fyi` | no (`fyi`) | raiser; gate caps it | `today` |
-| `labels` | string[] | no | raiser | `["hire"]`, `["escalate"]`, `["manual-task"]` |
+| `labels` | string[] | no | raiser | `["growth"]`, `["escalate"]`, `["manual-task"]` |
 | `title` | string, verb first, ≤ ~12 words | yes | raiser | "Admit the legal team's checklist" (Task) |
 | `ask` | string, one imperative line | yes | raiser | "Approve or refuse the proposed skill." (Task) |
 | `ask_verbatim` | string | no | raiser | the requester's own words, quoted, never paraphrased |
@@ -115,7 +115,7 @@ The current item file is a cache of the log's effect, kept in first-class fields
 
 ## How things become items
 
-**A team's proposal** (a G5 hire, a script, a tool or a permission increase from [teams.md](teams.md)): the calling session submits with `labels: ["hire"]`, `band: decide`, `action_class: create_agent_primitive` or `grant_permission`, `action_request: {action: "admit_primitive", args: {team, primitive, proposal}}`, the coverage entry and the proposal folder in `links`, `dedupe_key: "proposal:<team>/<primitive>@<version>"`. The representative annotates. `accept` sends the session to move the proposal to its active home and write the growth log; its receipt completes the item.
+**A team's growth** (a new or changed primitive, or a lead's tools, from [teams.md](teams.md)) is not an item by default: the calling session decides, writes the growth log, and the next brief lists it. It becomes an item only on a host whose consent table sets `create_agent_primitive` or `grant_permission` to `ask_first`; then the calling session submits with `labels: ["growth"]`, `band: decide`, `action_class: create_agent_primitive` or `grant_permission`, `action_request: {action: "admit_primitive", args: {team, primitive, proposal}}`, the coverage entry and the proposal folder in `links`, `dedupe_key: "proposal:<team>/<primitive>@<version>"`. The representative annotates. `accept` sends the session to move the proposal to its active home and write the growth log; its receipt completes the item.
 
 **An escalation** (verdict `escalate`): `labels: ["escalate"]`, `band: decide` (or `unblock` if a professional must be engaged), `decision.question` carrying the brief's question, the brief in `links`, `due` from the deadline, no `action_request`. `accept` acknowledges and completes; `respond` sends the principal's answer back to the team.
 

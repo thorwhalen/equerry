@@ -24,8 +24,8 @@ The class is decided by a rule over the action (its name, its target, its argume
 | `publish` | making something public: a release, a package upload, a public page, a post, a public repository | `ask_first` | public is permanent |
 | `merge_outside_orgs` | merging into, or pushing to the default branch of, a repository whose owner is not in `own_orgs` | `ask_first` | someone else's codebase; merging inside `own_orgs` is `reversible` |
 | `secret_or_account_change` | creating, rotating or reading out a secret; changing an account's settings, billing, membership or authentication | `off` | the principal does these by hand; an item asks them to |
-| `create_agent_primitive` | admitting a new or changed sub-agent, tool, script, MCP server, or a mechanic shared by several teams (the teams' G5) | `ask_first` | a primitive changes what every later session does |
-| `grant_permission` | widening any permission: a tool allowlist, a team letter's ceiling, a sandbox or settings rule, a token's scopes | `ask_first` | a permission is a standing consent |
+| `create_agent_primitive` | admitting a new or changed sub-agent, tool, script, MCP server, or a mechanic shared by several teams | `allowed` | the teams are agents: growing them costs tokens and attention, nothing else, so the calling session decides, writes the growth log and the next brief lists it (the principal's correction of 2026-11-09, [teams.md](teams.md), "Lean"); a host may still set it to `ask_first` |
+| `grant_permission` | widening a standing permission: a tool allowlist in settings, a sandbox rule, a token's scopes. Not a team lead's tools, which the calling session sets per ask within its own permissions and logs ([teams.md](teams.md)) | `ask_first` | a permission is a standing consent |
 | `schedule` | creating a standing job: a timer, a cron line, a cloud routine, a recurring calendar entry | `ask_first` | runs, and spends, when nobody watches; a reminder the principal asked for is a desk item, not this class |
 | `read_sensitive_field` | reading an `amber` or `red` field of the principal's dossier | `ask_first` | until the dossier's read verb enforces labels in code; a host where it does may set `allowed` (the read verb then applies its own label rules and log) |
 | `reversible` | everything a rule positively identifies as undoable: editing files in a working tree, commits on a branch, opening a PR, merging inside `own_orgs`, drafting | `allowed` | the representative's call is the remaining check |
@@ -62,7 +62,7 @@ An item whose options span classes is routed by its strictest option, and each o
 | upload a release to a package index | `publish` (`release`) | `ask_first` | shown, one-way |
 | post a reply in a chat with a collaborator | `message_person` (`send_message`) | `ask_first` | shown; voice may not approve it |
 | add an API token to CI | `secret_or_account_change` (`set_secret`) | `off` | shown as a by-hand request |
-| admit a team's proposed sub-agent | `create_agent_primitive` (`admit_primitive`) | `ask_first` | shown (G5) |
+| admit a team's new sub-agent | `create_agent_primitive` (`admit_primitive`) | `allowed` | `auto`: the session admits and logs it; the brief lists it |
 | a team letter with `publish: off` raises a release | `publish` | `off` (letter) | shown as a by-hand request |
 
 ## Where the file lives
@@ -78,10 +78,10 @@ The file is the principal's: an instance file, private, edited by hand, under ve
 
 ## How a verdict is logged
 
-Every routing writes one `equerry.item.routed` event ([item.md](item.md) §Events), including those under tolerance and those the gate let through:
+Every routing writes one `equerry.item.routed` event ([item.md](item.md) §Events), including those under tolerance and those the gate let through. The example comes from a host whose `consent.yaml` sets `create_agent_primitive` to `ask_first` (the default is `allowed`):
 
 ```json
-{"specversion":"1.0","id":"ev-0002","source":"/equerry/gate","type":"equerry.item.routed","subject":"itm-01JC8Z3K4M2N5P6Q7R8S9T0V1W","time":"2026-11-09T14:03:11Z","datacontenttype":"application/json","data":{"route":"shown","action_class":"create_agent_primitive","reversibility":"two_way","consent":{"setting":"ask_first","from":"default","rule":"admit_primitive"},"risk":"low","coverage":"adjacent","revision":1}}
+{"specversion":"1.0","id":"ev-0002","source":"/equerry/gate","type":"equerry.item.routed","subject":"itm-01JC8Z3K4M2N5P6Q7R8S9T0V1W","time":"2026-11-09T14:03:11Z","datacontenttype":"application/json","data":{"route":"shown","action_class":"create_agent_primitive","reversibility":"two_way","consent":{"setting":"ask_first","from":"consent.yaml","rule":"admit_primitive"},"risk":"low","coverage":"adjacent","revision":1}}
 ```
 
 `consent.from` is `default`, `consent.yaml`, `consent.yaml#<rule-id>` or `letter:<team>`, so an audit can say which line of which file allowed an action. The principal's later answer is an `equerry.item.responded` event; an attempt to act on an `off` class or to answer from the wrong place is an `equerry.item.refused` event with `off_by_consent` or `not_principal_surface`. Together these are the override log the architecture's learning loop reads: overrides of items the gate let through are the false auto-approve rate.

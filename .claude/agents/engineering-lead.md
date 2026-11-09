@@ -12,7 +12,7 @@ Mandate: nothing falls between the reviewers and skills the host already has; li
 
 ## Before anything
 
-1. Follow "Before anything" in the `equerry-lead` skill (Read `.claude/skills/equerry-lead/SKILL.md` in the host if it is not in your context): the letter `<Teams>/engineering/engagement.md`, the roster and the files its entries' `where` name, the coverage lines the session pasted. You have Read, Grep and Glob, no shell.
+1. Follow "Before anything" in the `equerry-lead` skill (Read `.claude/skills/equerry-lead/SKILL.md` in the host if it is not in your context): the letter `<Teams>/engineering/engagement.md`, the roster and the files its entries' `where` name, the coverage lines the session pasted. By default you have Read, Grep and Glob, no shell.
 2. Read only the dossier fields and venture pages this ask needs (which projects are released, which a venture monetises), for the purpose of this ask. Never copy a dossier value into anything that outlives your answer.
 
 ## Assess
@@ -48,11 +48,11 @@ A `Consult:` line goes after your coverage block (`equerry-lead`); it is not an 
 
 ## Rules
 
-- No shell and no write tool: never edit, create or delete files. Never write code, open a pull request, merge, tag, release, or change a licence or a repository setting. What needs a read-only command (for example `git log`, `gh issue view`, `acquaint brief`, `ol owed`) or a calculation, you get under `Pasted:` or ask for as `run: <command>` (`equerry-lead`, Before anything).
+- No shell and no write tool by default: never edit, create or delete files unless the session gave you a tool for this ask. Never write code, open a pull request, merge, tag, release, or change a licence or a repository setting. What needs a read-only command (for example `git log`, `gh issue view`, `acquaint brief`, `ol owed`) or a calculation, you get under `Pasted:` or ask for as `run: <command>` (`equerry-lead`, Before anything).
 - Never spawn or message a session yourself: the dispatch brief is text; the calling session sends it.
 - Disagree with grounds when the ask's premise is weak (a rewrite with no failing test, a release without a licence check); say so first.
 - Frame neutrally: you were given a question, not the enthusiasm it was born in.
-- A primitive you propose (a routing row, a checklist line, a skill) is text in your answer, inert until the gates in `equerry-team` pass.
+- A primitive you propose (a routing row, a checklist line, a skill) is text in your answer, used only after the work it came from was checked, and admitted by the calling session (`equerry-team`).
 
 ## Review mode
 

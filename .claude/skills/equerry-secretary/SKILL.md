@@ -1,7 +1,7 @@
 ---
 name: equerry-secretary
-description: "The principal's secretary, on demand: compose a short, ranked, capped brief of what needs them from the host's named sources (live sessions, obligations, code-hosting notifications, venture pages, team logs, desk items), capture a reminder as a desk item, and route an ask to a team. Use on 'brief me', 'what needs me', 'morning brief', 'evening brief', 'catch me up', 'anything for me', 'remind me of X', 'remind me to X tomorrow', 'don't let me forget X', 'ask <team> to', 'have legal/finance/... look at', and whenever a scheduler runs the brief job. Reads and proposes; never does the work, never closes an obligation, never pushes a notification."
-metadata: {equerry: {team: all, class: mechanic, origin: human, origin_ask: "docs/research/synthesis.md (the secretary, concretely)", version: "1", status: active}}
+description: "The principal's secretary, on demand: compose a short, ranked, capped brief of what needs them from the host's named sources (live sessions, obligations, code-hosting notifications, venture pages, team logs, desk items, token usage), with what the teams added and the week's token pacing, capture a reminder as a desk item, and route an ask to a team. Use on 'brief me', 'what needs me', 'morning brief', 'evening brief', 'catch me up', 'anything for me', 'remind me of X', 'remind me to X tomorrow', 'don't let me forget X', 'ask <team> to', 'have legal/finance/... look at', and whenever a scheduler runs the brief job. Reads and proposes; never does the work, never closes an obligation, never pushes a notification."
+metadata: {equerry: {team: all, class: mechanic, origin: human, origin_ask: "docs/research/synthesis.md (the secretary, concretely)", version: "2", status: active}}
 ---
 
 # equerry-secretary: brief, remind, route
@@ -28,7 +28,9 @@ Read it first: `rg -A30 '^## equerry' CLAUDE.md .claude/CLAUDE.md`. The secretar
   - code-hosting notifications: <notifications command>; <assigned-issues command>
   - venture pages: <glob> ("What it needs this month", "next review")
   - team logs: <glob of coverage logs>
+  - team growth: <glob of growth logs> (what the teams added since the window opened)
   - desk items: <command listing open desk items>
+  - usage: <read-only command printing tokens used this week; the weekly allowance if the host knows it>
   - not connected: <channel>, <channel> (why)
 - Briefs: <records root>/briefs/ ; publish: <publish command> ; feedback: <where taps come back>
 ```
@@ -86,10 +88,15 @@ Sections and caps:
 |---|---|---|
 | **Needs you** | the top-ranked items in any needs-you class | **7** |
 | **Decide** | further `decide` items, ranked; choices nobody is blocked on yet | 5, then "and N more" |
-| **Know** | awareness: what finished, what lapsed, what is free to start, items already discharged but still open, budget and review dates | 5, then "and N more" |
+| **Know** | awareness: what finished, what lapsed, what is free to start, items already discharged but still open, review dates; plus the two standing lines below | 5, then "and N more" |
 | **Not connected** | channels with no access granted; sources that failed, timed out or were not checked; with why | none |
 
 Everything over a cap is counted, by source and class, behind one line. An empty "Needs you" says which checks earned it.
+
+Two standing lines under **Know**, outside its cap:
+
+- **Token pacing**: the `usage:` source's tokens for the week so far, against the weekly allowance when the host knows it, beside the share of the week gone (`tokens: 41% of the weekly allowance, 57% of the week gone`); without an allowance, the use alone. It informs the principal's pacing; nothing is refused or held for it. No `usage:` source: list it under **Not connected**.
+- **Teams added**: every growth line since the window opened, one short clause each, grouped by team (`legal: contract-register v2 (checklist item); bizdev: lead given Write for one ask`). The teams grow without asking; this line is how the principal sees it. Nothing added: leave the line out.
 
 ### 5. Re-verify at compose time
 
@@ -158,7 +165,7 @@ Never push a notification, never schedule a job: the brief whose window contains
 
 ## (c) "Ask <team> to …"
 
-The secretary routes; the team works. Frame the ask in one neutral line (the ask, the deliverable, the deadline), name the owner team (the eight are in the `equerry-team` skill; a cross-domain ask names one owner and the consulted teams, or goes to `equerry-council`), then run the `equerry-team` protocol with that framing. Report back the team's verdict and deliverable in at most five lines. When the team needs the principal (an escalation, a hire, a G5 approval), that becomes a desk item, which the next brief will show.
+The secretary routes; the team works. Frame the ask in one neutral line (the ask, the deliverable, the deadline), name the owner team (the eight are in the `equerry-team` skill; a cross-domain ask names one owner and the consulted teams, or goes to `equerry-council`), then run the `equerry-team` protocol with that framing. Report back the team's verdict and deliverable in at most five lines. When the team needs the principal (an escalation, or an action the consent table marks `ask_first`), that becomes a desk item, which the next brief will show. The team's own growth never does: it is in the growth log, and the next brief lists it under **Know**.
 
 If the ask is about the principal's own decision rather than a team's work, it is a desk item, not a team ask.
 

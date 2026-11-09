@@ -27,8 +27,8 @@ classes:
   publish: ask_first                   # releases, package uploads, public pages, posts, public repositories
   merge_outside_orgs: ask_first        # merge or push to the default branch of a repo not in own_orgs
   secret_or_account_change: "off"      # create, rotate or reveal secrets; account settings, billing, membership
-  create_agent_primitive: ask_first    # admit a sub-agent, tool, script, MCP server, shared mechanic (teams' G5)
-  grant_permission: ask_first          # widen a tool allowlist, a letter's ceiling, a sandbox rule, token scopes
+  create_agent_primitive: allowed      # admit a sub-agent, tool, script, MCP server, shared mechanic: the session decides and logs it; the brief lists it
+  grant_permission: ask_first          # widen a settings allowlist, a sandbox rule, token scopes (not a lead's tools for an ask)
   schedule: ask_first                  # standing jobs: timers, cron lines, cloud routines, recurring invites
   read_sensitive_field: ask_first      # amber or red dossier fields; `allowed` once the read verb enforces labels
   reversible: allowed                  # what a rule positively identifies as undoable

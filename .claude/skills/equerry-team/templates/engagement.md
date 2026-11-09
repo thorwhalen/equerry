@@ -1,14 +1,9 @@
 ---
 team: <team id: legal | finance | people | bizdev | marketing | product | engineering | ventures>
 lead: <team>-lead
-status: proposed          # active | paused | proposed; a team runs only when active AND signed AND review_by is in the future
-review_by: <YYYY-MM-DD>   # three to six months out for a new letter
-signed: null              # set by the principal only: <YYYY-MM-DD>, <desk item URL or "in person">
 jurisdictions: [<US | FR | EU | ...>]   # the rules the team applies; a jurisdiction with no reference pack is a knowledge gap
-growth_budget: {train: 3, hire: 1}      # per calendar month; G0 refuses growth beyond it
-cost_budget: {agent_calls: 60, tokens: null}   # per calendar month; G0 refuses growth past it
-skill_cap: 3              # most active skills on the roster, the domain skill included
-permissions_ceiling: [Read, Grep, Glob, WebSearch, WebFetch]   # Bash only as command patterns, e.g. "Bash(python3 -c:*)"; never bare
+# review_suggested: <YYYY-MM-DD>       # optional: a hint for the team review, never a stop
+# status: paused                       # optional: stops the team; omit it and the letter is active by being present
 ---
 # <Full domain name>: engagement letter
 

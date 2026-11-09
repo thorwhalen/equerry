@@ -1,6 +1,6 @@
 # Roster of <team>: one entry per primitive the team uses, its own or borrowed.
 # Field definitions: the equerry-team skill, references/team-files.md.
-# Edited by the distil step (equerry-team) and the monthly review (equerry-team-review), never by a lead.
+# Edited by the calling session at the distil step (equerry-team) and in a team review (equerry-team-review), never by a lead.
 
 - id: <team>/lead
   kind: subagent
