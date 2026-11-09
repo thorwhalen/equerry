@@ -22,6 +22,21 @@ An equerry is the officer who manages a sovereign's day. This one manages yours 
 
 The design is in [docs/architecture.md](docs/architecture.md). The research that led to it is in [docs/research/](docs/research/README.md).
 
+## Teams
+
+Domain work (legal, finance, people, bizdev, marketing, product, engineering, ventures) is done by **teams**: one experienced generalist lead per domain, modelled on a fractional executive, working under a written engagement letter, judging coverage from artefacts before acting, and growing its skills only from checked work through gates. The design is in [docs/teams.md](docs/teams.md). Everything is agent skills and sub-agent files under `.claude/`; there is no code.
+
+| Kind | Name | What it does |
+|---|---|---|
+| Skill | `equerry-team` | the protocol: frame, assess, act, verify, distil, gate; the letter, roster, log and reply formats; templates |
+| Skill | `equerry-council` | several leads on one question, the contradictor always, disagreements kept |
+| Skill | `equerry-team-review` | monthly per team: recurring gaps, unused primitives, false-coverage rate, retirements |
+| Skills | `equerry-<team>` | each domain's playbook: recurring tasks, escalation line, checklists, dated sources |
+| Agents | `<team>-lead` | the eight leads, read-only |
+| Agents | `contradictor`, `checker`, `navigator` | shared staff: find what does not hold; verify against a checklist; know which tools already exist |
+
+A host turns teams on with a six-line `## equerry` block in its `CLAUDE.md` (where letters, logs, the dossier, venture pages, the navigator and the desk live); see `docs/teams.md`, "Seams".
+
 ## Relation to its siblings
 
 equerry is glue, not a new framework. It composes tools that exist: [crowsnest](https://github.com/thorwhalen/crowsnest) (watch the live sessions), [openloops](https://github.com/thorwhalen/openloops) (obligations between you and your agents), [astern](https://github.com/thorwhalen/astern) (mine past sessions), [acquaint](https://github.com/thorwhalen/acquaint) (records of people, including the principal's own record that the representative reads), [annals](https://github.com/thorwhalen/annals) (where agents publish for a phone), [correspond](https://github.com/thorwhalen/correspond) (one facade over GitHub, mail, Slack, WhatsApp and push channels). Where a capability is missing, it is built in the sibling that owns that kind of thing, and equerry wires it.

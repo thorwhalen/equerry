@@ -1,0 +1,43 @@
+# Roster of <team>: one entry per primitive the team uses, its own or borrowed.
+# Field definitions: the equerry-team skill, references/team-files.md.
+# Edited by the distil step (equerry-team) and the monthly review (equerry-team-review), never by a lead.
+
+- id: <team>/lead
+  kind: subagent
+  class: mechanic
+  where: .claude/agents/<team>-lead.md
+  version: "1"
+  origin: human
+  origin_ask: seed
+  created: <YYYY-MM-DD>
+  last_validated: null
+  evals: none
+  permissions: [Read, Grep, Glob, WebSearch, WebFetch, Bash]
+  status: active
+
+- id: <team>/domain-skill
+  kind: skill
+  class: mechanic
+  where: .claude/skills/equerry-<team>/SKILL.md
+  version: "1"
+  origin: human
+  origin_ask: seed
+  created: <YYYY-MM-DD>
+  last_validated: null
+  evals: none
+  permissions: [Read]
+  status: active
+
+# A borrowed fleet tool: owned by another package, used by this team. Example only; replace with what the navigator reports.
+- id: <team>/publish-for-phone
+  kind: fleet-tool
+  class: fleet
+  where: "annals: annals publish <path>"
+  version: "1"
+  origin: imported
+  origin_ask: seed
+  created: <YYYY-MM-DD>
+  last_validated: null
+  evals: none
+  permissions: [Bash]
+  status: active
