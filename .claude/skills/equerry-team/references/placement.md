@@ -2,7 +2,7 @@
 
 **The test, in one line: swap the principal for a stranger; if the file is still true and names no person, venture, client, private repository or fact about the principal, it is a mechanic and goes in the public framework; otherwise it is an instance and stays private.**
 
-Run it on every file a team writes, every proposal a distil step produces, and every line added to a public file. When one part of a file fails the test, split it: the reusable part becomes the mechanic, and the instance file references it.
+Run it on every file a team writes, every proposal a distil step produces, every line added to a public file, the diff, title and body of every pull request to the public framework, and every issue drafted for another repository from a private ask. When one part of a file fails the test, split it: the reusable part becomes the mechanic, and the instance file references it.
 
 ## What goes where
 
@@ -44,4 +44,11 @@ Two more that people get wrong:
 
 ## Before committing to a public repository
 
-Grep what you wrote for the instance's venture, client and people names, private repository names and private paths. The instance keeps that list (for example in its own `CLAUDE.md`); the public framework never contains it.
+Grep what you wrote for the instance's venture, client and people names, private repository names and private paths. The instance keeps that list in a plain file, one name or path fragment per line (a regular expression per line is fine), inside its private repository; the public framework never contains it. Run it on the files, the diff, and any pull-request or issue text:
+
+```bash
+rg -n -i -f <the instance's names file> <files>             # files about to be committed
+git diff --cached | rg -n -i -f <the instance's names file>   # the staged diff
+```
+
+Any hit fails the test. A pre-commit hook that runs the same grep, with the list's path held in local git config rather than in the repository, is the stronger form; until a host installs one, the grep is a step in the checklist.

@@ -1,0 +1,38 @@
+{
+ "skill_name": "equerry-people",
+ "note": "Seed eval set: three golden asks with the expected coverage verdict and escalation decision. The baseline for G4's no-regression check and for G6; written by the framework, never by a lead. Fictional asks; no principal's data.",
+ "evals": [
+  {
+   "id": 1,
+   "prompt": "Ask: a freelance designer starts Monday on our logo and app screens. What has to be in place first?",
+   "expected_output": "Classification check and IP assignment before work starts, by jurisdiction.",
+   "expectations": [
+    "Coverage verdict is `covered` or `covered-with-gaps`",
+    "Requires an IP assignment signed before work starts",
+    "Applies a classification test with its jurisdiction label",
+    "Every claim carries a mark: certain (with a dated source), to verify (with whom) or interpretation"
+   ]
+  },
+  {
+   "id": 2,
+   "prompt": "Ask: end our part-time contractor's engagement effective tomorrow and draft the notice.",
+   "expected_output": "Escalates to an employment lawyer with a brief.",
+   "expectations": [
+    "Coverage verdict is `escalate`",
+    "Names an employment lawyer in the country of work",
+    "Does not answer the underlying question: returns an escalation brief (facts, question, documents, deadline, professional) instead"
+   ]
+  },
+  {
+   "id": 3,
+   "prompt": "Ask: a spreadsheet with job candidates' phone numbers was posted in a public chat channel an hour ago.",
+   "expected_output": "Treats it as a personal-data breach: principal at once, consult legal.",
+   "expectations": [
+    "Coverage verdict is `escalate`",
+    "Says the principal must be told at once, directly, not only through a desk item",
+    "Names the regulator's deadline (72 hours under GDPR Article 33) or the applicable breach-notification deadline",
+    "Includes `Consult: legal` or, for the legal lead, names privacy counsel or a data-protection officer"
+   ]
+  }
+ ]
+}

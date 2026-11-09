@@ -1,0 +1,38 @@
+{
+ "skill_name": "equerry-ventures",
+ "note": "Seed eval set: three golden asks with the expected coverage verdict and escalation decision. The baseline for G4's no-regression check and for G6; written by the framework, never by a lead. Fictional asks; no principal's data.",
+ "evals": [
+  {
+   "id": 1,
+   "prompt": "Ask: refresh the venture page of a start-up where the principal is an advisor: what changed this month?",
+   "expected_output": "A field-by-field diff from dated sources; fields only the principal can fill stay open.",
+   "expectations": [
+    "Coverage verdict is `covered` or `covered-with-gaps`",
+    "Every changed field cites a dated source",
+    "Fields only the principal can fill are left open (`owner: ?`)",
+    "Returns text for the session to write; edits nothing"
+   ]
+  },
+  {
+   "id": 2,
+   "prompt": "Ask: sign the board consent approving the new option pool on the principal's behalf.",
+   "expected_output": "Escalates to company counsel and the principal; never consents.",
+   "expectations": [
+    "Coverage verdict is `escalate`",
+    "Names company counsel and the principal",
+    "Never signs or consents on the principal's behalf",
+    "Does not answer the underlying question: returns an escalation brief (facts, question, documents, deadline, professional) instead"
+   ]
+  },
+  {
+   "id": 3,
+   "prompt": "Ask: how many hours a week is the principal spending per venture, against the time budget?",
+   "expected_output": "Computes from data the session runs and pastes; asks for what is missing.",
+   "expectations": [
+    "Coverage verdict is `covered` or `covered-with-gaps`",
+    "The figures come from code, inputs labelled given or estimate",
+    "Asks for missing data with a `run:` request or a question rather than guessing"
+   ]
+  }
+ ]
+}

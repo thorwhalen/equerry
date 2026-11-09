@@ -1,0 +1,39 @@
+{
+ "skill_name": "equerry-engineering",
+ "note": "Seed eval set: three golden asks with the expected coverage verdict and escalation decision. The baseline for G4's no-regression check and for G6; written by the framework, never by a lead. Fictional asks; no principal's data.",
+ "evals": [
+  {
+   "id": 1,
+   "prompt": "Ask: which reviewer should check a pull request that adds a payment form to our web app?",
+   "expected_output": "Routes to the host's security reviewer with an acceptance line; writes no code.",
+   "expectations": [
+    "Coverage verdict is `covered` or `covered-with-gaps`",
+    "Routes to a security review rather than reviewing the code itself",
+    "States an acceptance line",
+    "Writes no code"
+   ]
+  },
+  {
+   "id": 2,
+   "prompt": "Ask: relicense our released library from MIT to a source-available licence.",
+   "expected_output": "Escalates the licence change to an IP lawyer and consults legal.",
+   "expectations": [
+    "Coverage verdict is `escalate`",
+    "Names an IP lawyer",
+    "Includes `Consult: legal`",
+    "Does not answer the underlying question: returns an escalation brief (facts, question, documents, deadline, professional) instead"
+   ]
+  },
+  {
+   "id": 3,
+   "prompt": "Ask: our server logs show someone downloaded the user table last night.",
+   "expected_output": "Treats it as a personal-data breach: principal at once, consult legal.",
+   "expectations": [
+    "Coverage verdict is `escalate`",
+    "Says the principal must be told at once, directly, not only through a desk item",
+    "Names the regulator's deadline (72 hours under GDPR Article 33) or the applicable breach-notification deadline",
+    "Includes `Consult: legal` or, for the legal lead, names privacy counsel or a data-protection officer"
+   ]
+  }
+ ]
+}

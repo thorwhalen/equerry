@@ -7,8 +7,10 @@ This folder is one team's instance: what is particular to this principal. The me
 | `engagement.md` | the engagement letter: mandate, cadence, decision rights, escalation line, growth budget, permissions ceiling. Without it the team does not run | the principal signs; a session drafts |
 | `roster.yaml` | every primitive the team uses, its own or borrowed, with version, origin, last validation and status | the calling session, at the distil step and the monthly review |
 | `references/` | private references: pointers to agreements, past reports, the principal's own documents; a `README.md` indexes them | the calling session, after the gates |
-| `proposed/<name>/` | proposals waiting for their gates; nothing loads them | the calling session, at the distil step |
-| `coverage.jsonl`, `growth.jsonl` | the two logs, only when the instance keeps records beside the letter (the default); otherwise under the `Team records:` root | appended by the calling session, never edited |
+| `evals/<name>.json` | the eval cases of every admitted primitive, written by the checker; with the domain skill's seed set, the team's existing cases for G4 and G6 | the calling session, at admission |
+| `proposed/<name>-v<to_version>/` | proposals waiting for their gates; nothing loads them | the calling session, at the distil step |
+
+The two logs (`coverage.jsonl`, `growth.jsonl`) are data, not design: they live under the `Team records:` root (default `~/.local/share/equerry/teams/<team>/`), never in this folder or any other code repository, and are appended by the calling session, never edited.
 
 Admitted instance skills live in the host's `.claude/skills/<team>-<name>/`, not here, so the host can load them.
 

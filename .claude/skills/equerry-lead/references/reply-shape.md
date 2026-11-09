@@ -9,14 +9,17 @@ Judged from artefacts only: the roster, the coverage log, each primitive's last 
 ```text
 Coverage: <covered | covered-with-gaps | train | hire | escalate>
 - Procedure: <the primitive that holds the steps, by roster id, or "none">
-- Quality: <what the result can be checked against (a checklist, a test, the contradictor), and the primitive's last validation, or "never validated">
+- Quality: <the primitive's last validation (date, model, score); or, for a human-seeded primitive never validated, the named checklist or test the checker will run at step 7; or "none">
 - Knowledge: <the references used, with their dates and jurisdictions; what is stale (older than its re-verify interval) or missing>
 - Context: <the dossier fields and venture pages needed: present, missing, or not needed>
 - Authority: <the letter's right that applies (may decide / recommends / agree / never) and whether the escalation line is crossed>
 Primitives: <roster ids, or none>
+Similar: <coverage ids of earlier asks this one resembles, from the pasted lines, or none>
+Candidate: <for covered-with-gaps: what would have closed the gap, one line (from "what bothers me"); otherwise none>
+Consult: <team>: <one neutral question>     (zero or more lines; the session turns each into an ask to that team)
 ```
 
-Five dimensions, one evidence line each. A dimension with no artefact behind it is a gap, whatever the lead believes. The verdict follows from the lines: all five hold, `covered`; a gap that research can fill once, `covered-with-gaps`; a gap a roster primitive could close with a delta, `train`; a gap no primitive covers, `hire`; authority crosses the escalation line or the letter's Never list, `escalate` (wins over all others).
+Five dimensions, one evidence line each. A dimension with no artefact behind it is a gap, whatever the lead believes. For quality, a human-seeded primitive (`origin: human`, never validated) with a named checklist counts as an artefact: the checker's pass against that checklist at step 7 is its validation, and a check still failing after two rounds leaves the work unverified (its entry in the coverage line's `quality` list shows `pass` below `total`). The verdict follows from the lines: all five hold, `covered`; a gap that research can fill once, `covered-with-gaps`; a gap a roster primitive could close with a delta, `train`; a gap no primitive covers, `hire`; authority crosses the escalation line or the letter's Never list, or the prompt says `Forced: escalate`, `escalate` (wins over all others). Another team's domain is a `Consult:` line, never an `escalate`.
 
 ## 2. The advice reply (the work)
 
@@ -25,7 +28,9 @@ At most 400 words unless the ask is for a document. In this order:
 1. **My view**: the recommendation, plainly, in one to three sentences. A view, not a survey of options.
 2. **What bothers me**: reservations and disagreements, including with the principal, another team or an earlier decision. If there are none, say why in one sentence; a view without reservations is rare.
 3. **What we would need to know**: the missing facts or figures, and **at most two questions** for the principal, each answerable in a line.
-4. **Sources**: numbered `[1]`, `[2]`, each with its title, URL or path, and the date checked; or "experience, not sourced" for a claim that has none.
+4. **Sources**: numbered `[1]`, `[2]`, each with its title, URL or path, and the date checked. A claim with no source is marked interpretation; there is no "experience" source.
+
+**Dossier facts are cited by field name, never by value**, unless the dossier labels the field `clear`: write `dossier: working_hours (present)`, not the hours. The session pastes your answer into deliverables that last and get published; a value there outlives the purpose it was read for. The same holds in the coverage block's Context line and in an escalation brief.
 
 **Every claim carries one of three marks:**
 

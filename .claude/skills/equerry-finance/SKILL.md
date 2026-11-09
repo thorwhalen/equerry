@@ -1,6 +1,6 @@
 ---
 name: equerry-finance
-description: "The finance team's playbook (finance, tax and administration) for a founder with several entities, consulting income and a personal tax position, in the US and France: recurring tasks with cadence, what the team may decide, recommends and never does, the escalation line to a CPA, enrolled agent or expert-comptable, the cross-domain events it joins, a review-mode checklist and dated references. Preloaded by the finance-lead sub-agent. Load it directly for 'ask finance', cash and runway, month-end close, monthly pack, estimated taxes, French corporate tax instalments, VAT CA12, CFE, DSN, FBAR, R&D credits, pricing an offer by script, subscriptions and renewals, or a spend review of a plan or budget."
+description: "The finance team's playbook (finance, tax and administration) for a founder with several entities, service income and a personal tax position, in the jurisdictions its engagement letter names (reference packs for the US, France and the EU ship with it): recurring tasks with cadence, what the team may decide, recommends and never does, the escalation line to a CPA, enrolled agent or expert-comptable, the cross-domain events it joins, a review-mode checklist and dated references. Preloaded by the finance-lead sub-agent. Load it directly for 'ask finance', cash and runway, month-end close, monthly pack, estimated taxes, French corporate tax instalments, VAT CA12, CFE, DSN, FBAR, R&D credits, pricing an offer by script, subscriptions and renewals, or a spend review of a plan or budget."
 metadata: {equerry: {team: finance, class: mechanic, origin: human, origin_ask: "docs/teams.md", version: "1", status: active}}
 ---
 
@@ -8,7 +8,7 @@ metadata: {equerry: {team: finance, class: mechanic, origin: human, origin_ask: 
 
 Last checked 2026-11-09; re-verify quarterly. Tax regimes, rates and dates move every year (Section 174A, the French innovation credit, the simplified VAT regime); a rule checked more than a quarter ago is a rule to verify. Nothing here is tax or accounting advice: the team computes, organises, explains and briefs the professional.
 
-Jurisdiction labels: `[US]` federal United States, Delaware as the default state of incorporation; `[FR]` France; `[EU]` European Union law that applies in France. Numbers in brackets are entries of `references/sources.md` (the numbering of the research report the team was built from, so a number means the same source in every team).
+Jurisdiction labels: `[US]` federal United States, Delaware as the default state of incorporation; `[FR]` France; `[EU]` European Union law that applies in France. Numbers in brackets are entries of `references/sources.md` (the numbering of the research report the team was built from, so a number means the same source in every team). The letter's `jurisdictions:` field says which of these apply to this principal: skip the rows of any other label, and treat a jurisdiction the letter names but this skill has no pack for as missing knowledge (the coverage block says so). US, FR and EU are the packs this framework ships, not a profile of anyone.
 
 The protocol (assess, act, verify, distil, gate) is the `equerry-team` skill; this skill is what the finance team knows. The instance's engagement letter (`<Teams>/finance/engagement.md`) may narrow anything here; it never widens the "never" list.
 
@@ -58,7 +58,7 @@ The rule: an agent may compute, organise and brief; it may not be the profession
 |---|---|---|
 | A tax return, a tax position, an election, an R&D credit claim | CPA or enrolled agent `[US]`; expert-comptable `[FR]` | entity, fiscal year, the figures by script with their sources, the question, the documents, the filing deadline |
 | Cross-border personal tax: residence, citizenship, foreign accounts | One adviser who knows both systems | residences and citizenships (as the dossier labels permit), income by source and country, the accounts list by institution, the deadlines [65] |
-| Payroll set-up, the first employee | Payroll provider, with the people team | entity, country, start date, the classification note, the DSN obligation [20] |
+| Payroll set-up, the first employee | Payroll provider (with a consult to people) | entity, country, start date, the classification note, the DSN obligation [20] |
 | Accounts kept for an entity other than the principal's own | Expert-comptable `[FR]` | the entity, what is asked, why the team stops [62] |
 | A commitment of money past the letter's threshold | The principal | the amount, the cash and runway effect by script, the alternatives |
 
@@ -66,18 +66,7 @@ On crossing the line the deliverable is the brief, filed as an `escalate` desk i
 
 ## Cross-domain events that touch finance
 
-The secretary is the directly responsible individual for each event; the event opens one item per team (`equerry-team/references/cross-domain-events.md`). Finance's item in each:
-
-| Event | Finance's item |
-|---|---|
-| Equity grant | tax consequences noted for the professional; 409A date checked with ventures [13] |
-| Fundraise (SAFE or priced) | the cash and runway effect; the pack and data-room numbers |
-| New consulting or fractional client | tax forms (W-9 / W-8 `[US]`); invoicing entity; VAT treatment `[FR]` `[EU]`; payment terms from the contract register |
-| Training engagement in France | the BPF data captured as each session is delivered [23]; funding route's invoicing rules (with bizdev) |
-| Product launch | store tax set-up and what the store remits [54]; new recurring costs added to the admin estate |
-| New contractor | W-9 or W-8 at onboarding; 1099-NEC obligation noted `[US]` [25] |
-| Taking a new role in a venture | tax consequences of any equity; expenses and invoicing arrangements |
-| Year end | next year's tax calendar from `references/calendar.md` and the venture pages; the admin estate's yearly renewals listed |
+The secretary is the directly responsible individual for each event, which opens one item per team. Finance's item in each event is the lines tagged `[finance]` in `equerry-team/references/cross-domain-events.md`, the only copy of those checklists (source numbers there are the same as in this skill's `references/sources.md`).
 
 ## Review-mode checklist
 
@@ -100,6 +89,7 @@ Severity: `blocker` (a missed filing with penalties, a money movement without th
 
 | File | Read it when |
 |---|---|
+| `references/evals.json` | running G4 or G6 for this team: the seed eval set (three golden asks with the expected verdict and escalation decision), the team's no-regression baseline |
 | `references/sources.md` | citing a rule or a rate; checking a source's jurisdiction, level and last-checked date |
 | `references/checklists.md` | month-end close, monthly pack, admin estate sweep, offer pricing |
 | `references/calendar.md` | the weekly tax sweep; adding a date; year-end roll-forward |

@@ -1,0 +1,47 @@
+{
+  "id": "itm-01JC8Z3K4M2N5P6Q7R8S9T0V1W",
+  "dedupe_key": "proposal:legal/ip-chain-check@1",
+  "revision": 1,
+  "state": "input-required",
+  "band": "decide",
+  "severity": "today",
+  "labels": ["hire"],
+  "title": "Admit the legal team's IP chain-of-title checklist",
+  "ask": "Approve or refuse the legal lead's proposed skill legal/ip-chain-check.",
+  "why_now": "Third similar ask this month; the proposal passed G0 to G4.",
+  "if_ignored": "The next IP question is answered by hand again.",
+  "said": { "at": "2026-11-09T14:02:00Z", "basis": "growth log entry" },
+  "decision": {
+    "question": "Admit legal/ip-chain-check as an active skill of the legal team?",
+    "options": [
+      { "id": "admit", "label": "Admit it", "effect": "Moves the proposal to the team's skills; the roster marks it active.", "action_class": "create_agent_primitive", "reversibility": "two_way" },
+      { "id": "refuse", "label": "Refuse", "effect": "The proposal stays inert and is marked refused in the growth log.", "action_class": "reversible", "reversibility": "two_way" }
+    ],
+    "recommendation": "admit"
+  },
+  "action_request": { "action": "admit_primitive", "args": { "team": "legal", "primitive": "legal/ip-chain-check", "proposal": "teams/legal/proposed/ip-chain-check/" } },
+  "allowed_responses": ["accept", "respond", "ignore", "later"],
+  "action_class": "create_agent_primitive",
+  "reversibility": "two_way",
+  "route": "shown",
+  "predicted_objection": {
+    "risk": "low",
+    "coverage": "adjacent",
+    "reason": "Prefers checklists over new skills when a reference line would do.",
+    "instead": "Make it a checklist item in the existing legal skill.",
+    "sources": ["views.md#small-primitives"],
+    "by": "representative",
+    "at": "2026-11-09T14:03:10Z"
+  },
+  "raised_by": "session:legal-team-run",
+  "owner": "principal",
+  "links": [
+    { "label": "Proposal", "url": "teams/legal/proposed/ip-chain-check/SKILL.md", "kind": "artifact" },
+    { "label": "Coverage entry", "url": "teams/legal/coverage.jsonl#cov-0042", "kind": "log" }
+  ],
+  "tier": "tap",
+  "minutes": 3,
+  "source": "equerry-team",
+  "created": "2026-11-09T14:03:00Z",
+  "updated": "2026-11-09T14:03:10Z"
+}

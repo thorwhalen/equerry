@@ -1,6 +1,6 @@
 ---
 name: equerry-people
-description: "The people team's playbook (people and contracting) for a founder who works with co-founders, contractors, advisors and occasional employees across several ventures, in the US and France, and whose own facts agents keep needing: recurring tasks with cadence, what the team may decide, recommends and never does, the escalation line to an employment lawyer or payroll provider, the cross-domain events it joins, a review-mode checklist, dated references and the rules for reading the principal's facts. Preloaded by the people-lead sub-agent. Load it directly for 'ask people', contractor classification, requalification risk, IP assignment, invention assignment, equity grant, vesting, 83(b), BSPCE, onboarding or offboarding a collaborator, a people register, the principal's bio, title or handles, what may be disclosed to whom, or a people review of a plan, an agreement or a message."
+description: "The people team's playbook (people and contracting) for a founder who works with co-founders, contractors, advisors and occasional employees across several ventures, in the jurisdictions its engagement letter names (reference packs for the US, France and the EU ship with it), and whose own facts agents keep needing: recurring tasks with cadence, what the team may decide, recommends and never does, the escalation line to an employment lawyer or payroll provider, the cross-domain events it joins, a review-mode checklist, dated references and the rules for reading the principal's facts. Preloaded by the people-lead sub-agent. Load it directly for 'ask people', contractor classification, requalification risk, IP assignment, invention assignment, equity grant, vesting, 83(b), BSPCE, onboarding or offboarding a collaborator, a people register, the principal's bio, title or handles, what may be disclosed to whom, or a people review of a plan, an agreement or a message."
 metadata: {equerry: {team: people, class: mechanic, origin: human, origin_ask: "docs/teams.md", version: "1", status: active}}
 ---
 
@@ -8,7 +8,7 @@ metadata: {equerry: {team: people, class: mechanic, origin: human, origin_ask: "
 
 Last checked 2026-11-09; re-verify quarterly. Classification, IP and equity-tax rules differ by country and changed recently (the BSPCE tax treatment for 2025, 409A practice after SAFEs); a rule checked more than a quarter ago is a rule to verify. Nothing here is employment or tax advice: the team organises, checks, drafts for the principal's own use and briefs the professional.
 
-Jurisdiction labels: `[US]` federal United States, with the state named where state law decides (California for invention assignment); `[FR]` France; `[EU]` European Union law that applies in France. Numbers in brackets are entries of `references/sources.md`: plain numbers follow the domain research report's numbering, `D`-numbers the dossier research report's, so a number means the same source in every team.
+Jurisdiction labels: `[US]` federal United States, with the state named where state law decides (California for invention assignment); `[FR]` France; `[EU]` European Union law that applies in France. Numbers in brackets are entries of `references/sources.md`: plain numbers follow the domain research report's numbering, `D`-numbers the dossier research report's, so a number means the same source in every team. The letter's `jurisdictions:` field says which of these apply to this principal: skip the rows of any other label, and treat a jurisdiction the letter names but this skill has no pack for as missing knowledge (the coverage block says so). US, FR and EU are the packs this framework ships, not a profile of anyone.
 
 The protocol (assess, act, verify, distil, gate) is the `equerry-team` skill; this skill is what the people team knows. The instance's engagement letter (`<Teams>/people/engagement.md`) may narrow anything here; it never widens the "never" list.
 
@@ -44,10 +44,11 @@ The rule: an agent may organise, check, draft for the principal's own use and pr
 | When | Escalate to | The brief contains |
 |---|---|---|
 | Hiring an employee | Employment lawyer in the country of work; payroll provider | the role, the entity, the start date, the classification note, the IP and confidentiality terms wanted |
-| Terminating anyone's engagement | Employment lawyer (with legal) | the agreement, the dates, the reason as the principal states it, IP and data still to return, access to revoke |
+| Terminating anyone's engagement | Employment lawyer (with a consult to legal) | the agreement, the dates, the reason as the principal states it, IP and data still to return, access to revoke |
 | Reclassifying a contractor, or a high classification risk | Employment lawyer | the classification note with the evidence lines [26][27], the agreement, how long the relationship has run |
-| Equity to employees; an option or BSPCE plan; a grant with unclear tax treatment | Company counsel, with ventures and finance | the cap-table position, the 409A date [13], the grant terms, the 83(b) or BSPCE question [11][22] |
-| A dispute about unpaid work or IP | Counsel, through the legal team | facts in date order, the agreement, the work in question, the deadline |
+| Equity to employees; an option or BSPCE plan; a grant with unclear tax treatment | Company counsel (with consults to ventures and finance) | the cap-table position, the 409A date [13], the grant terms, the 83(b) or BSPCE question [11][22] |
+| A dispute about unpaid work or IP | Counsel (with a consult to legal for the brief) | facts in date order, the agreement, the work in question, the deadline |
+| A personal-data breach about a collaborator, a candidate or the principal (a record or message sent to the wrong person, a leaked file) | **The principal at once, directly** (the calling session interrupts; a desk item alone is too slow), with a consult to legal, which owns the breach brief and the regulator's deadline (72 hours under GDPR Article 33 `[EU]`) | what leaked, when it was found, whose data, to whom, which countries; never the leaked values themselves |
 | Storing or disclosing a value above `green` to an audience not cleared for it | The principal | the field (never its value), the purpose, the audience, why it seems needed |
 
 On crossing the line the deliverable is the brief, filed as an `escalate` desk item by the calling session; the lead does not answer the underlying question.
@@ -58,17 +59,7 @@ The public acquaint package holds records of people, including the principal's o
 
 ## Cross-domain events that touch people
 
-The secretary is the directly responsible individual for each event; the event opens one item per team (`equerry-team/references/cross-domain-events.md`). People's item in each:
-
-| Event | People's item |
-|---|---|
-| Equity grant | grant agreement and vesting written; 83(b) within 30 days [11] or BSPCE conditions [22]; the recipient's record updated by proposal |
-| Fundraise (SAFE or priced) | founder and key-person agreements and IP assignments in order for diligence [28][29] |
-| New consulting or fractional client | subcontractors' papers: classification, IP assignment flowing down to the client's terms |
-| Product launch | contributors' IP assignments complete for what ships |
-| New contractor | classification [26][27]; IP assignment [28][29]; tax form handed to finance; access set up least-privilege |
-| Taking a new role in a venture | the principal's own role documents; the dossier's roles field proposed for update |
-| Year end | people register reviewed; agreements up for yearly review listed; the principal's facts past review listed |
+The secretary is the directly responsible individual for each event, which opens one item per team. People's item in each event is the lines tagged `[people]` in `equerry-team/references/cross-domain-events.md`, the only copy of those checklists (source numbers there are the same as in this skill's `references/sources.md`).
 
 ## Review-mode checklist
 
@@ -90,6 +81,7 @@ Severity: `blocker` (an unassigned asset about to ship or be sold, a no-cure dat
 
 | File | Read it when |
 |---|---|
+| `references/evals.json` | running G4 or G6 for this team: the seed eval set (three golden asks with the expected verdict and escalation decision), the team's no-regression baseline |
 | `references/sources.md` | citing a rule; checking a source's jurisdiction, level and last-checked date |
 | `references/checklists.md` | classification test, IP assignment, equity grant, onboarding and offboarding |
 | `references/dossier.md` | reading, using or proposing a fact about the principal; deciding what may be disclosed to whom |

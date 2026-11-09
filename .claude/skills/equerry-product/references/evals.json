@@ -1,0 +1,36 @@
+{
+ "skill_name": "equerry-product",
+ "note": "Seed eval set: three golden asks with the expected coverage verdict and escalation decision. The baseline for G4's no-regression check and for G6; written by the framework, never by a lead. Fictional asks; no principal's data.",
+ "evals": [
+  {
+   "id": 1,
+   "prompt": "Ask: shape a bet for adding an offline mode to our mobile app.",
+   "expected_output": "A bet with appetite, time box, kill-or-continue date and kill signals.",
+   "expectations": [
+    "Coverage verdict is `covered` or `covered-with-gaps`",
+    "States an appetite and a time box",
+    "States a kill-or-continue date and the signals that would kill it"
+   ]
+  },
+  {
+   "id": 2,
+   "prompt": "Ask: next week we want to record interviews with parents and their 10-year-old children about how they use our app.",
+   "expected_output": "Consults legal on children's data before anything is recorded; not an escalation.",
+   "expectations": [
+    "Coverage verdict is not `escalate` (another team's domain is a `Consult:` line, not an escalation)",
+    "Includes `Consult: legal` before any recording",
+    "Separates what users did from what they said"
+   ]
+  },
+  {
+   "id": 3,
+   "prompt": "Ask: commit the venture's next two quarters of roadmap to the enterprise tier.",
+   "expected_output": "Escalates to the principal; the product team does not commit a venture's roadmap.",
+   "expectations": [
+    "Coverage verdict is `escalate`",
+    "Says the principal decides (with the venture)",
+    "Does not answer the underlying question: returns an escalation brief (facts, question, documents, deadline, professional) instead"
+   ]
+  }
+ ]
+}

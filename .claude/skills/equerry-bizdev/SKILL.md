@@ -1,6 +1,6 @@
 ---
 name: equerry-bizdev
-description: "Playbook of the bizdev team (sales and business development) for a solo founder who sells consulting, fractional roles and training: pipeline review with MEDDICC, proposals and statements of work that protect background IP, rate cards and the offer catalogue, French training compliance (BPF, Qualiopi), new-client and training-engagement checklists, the escalation line to legal and finance. Use when the bizdev-lead runs, when an ask is about the pipeline, a prospect, a proposal, an SOW, pricing an offer, a new client, a partnership or selling training, and when reviewing a plan or offer for the business concern. Route asks through the equerry-team skill."
+description: "Playbook of the bizdev team (sales and business development) for a solo founder who sells expert services (projects, retainers, part-time roles, training): pipeline review with MEDDICC, proposals and statements of work that protect background IP, rate cards and the offer catalogue, training compliance where the letter's jurisdictions regulate it (the French pack: BPF, Qualiopi), new-client and training-engagement checklists, consults to legal and finance. Use when the bizdev-lead runs, when an ask is about the pipeline, a prospect, a proposal, an SOW, pricing an offer, a new client, a partnership or selling training, and when reviewing a plan or offer for the business concern. Route asks through the equerry-team skill."
 metadata: {equerry: {team: bizdev, class: mechanic, origin: human, origin_ask: "docs/teams.md (phase 3 design)", version: "1", status: active}}
 ---
 
@@ -9,6 +9,8 @@ metadata: {equerry: {team: bizdev, class: mechanic, origin: human, origin_ask: "
 The domain skill of the `bizdev` team. The lead (`bizdev-lead`) loads it; the protocol that calls the lead is `equerry-team`. Source numbers in brackets are those of `references/sources.md`, which keeps the numbering of the framework's domain-experts report so that numbers match across teams.
 
 Last checked 2026-11-09; re-verify quarterly (the French training rules move every year).
+
+Rows labelled `[FR]` or `[US]` apply only when the letter's `jurisdictions:` field names that jurisdiction; a jurisdiction the letter names with no row here is missing knowledge, said so in the coverage block.
 
 ## Mandate
 
@@ -22,7 +24,7 @@ The model is the fractional executive: a bounded number of hours, named delivera
 |---|---|---|---|
 | Pipeline review: every open opportunity with stage, next step, date, value, qualified by MEDDICC (metrics, economic buyer, decision criteria, decision process, identify pain, champion, competition) | Weekly; an item only when a deal stalls or a next step is overdue | Top five next actions; stalled deals | [47]; checklist 1 |
 | Proposal and statement-of-work draft from the outline: scope, deliverables, cadence, out-of-scope, decision rights, background IP retained by the principal | Per opportunity | Draft for the principal | checklist 2 |
-| Rate card and offer catalogue: consulting, fractional roles, training formats | Quarterly | Updated catalogue, arithmetic shown | checklist 3 |
+| Rate card and offer catalogue: every offer format the principal sells (project, retainer, part-time role, training) | Quarterly | Updated catalogue, arithmetic shown | checklist 3 |
 | `[FR]` Training compliance: activity declaration held; annual pedagogical and financial report (BPF) filed in its campaign (1 April to 31 May in 2026); Qualiopi held before selling training paid from public or pooled funds (OPCO, CPF, France Travail, regions), required since 1 January 2022 | Annual; per training contract | BPF data ready; funding route chosen per contract | [23][24]; checklist 4 |
 | Client portfolio health: utilisation against the time budget, concentration risk, renewals | Monthly | One line per client, never a client name in a public artefact | checklist 3 |
 | Partnership and venture business development: introductions requested and owed | Monthly | Asks list for the ventures team's investor updates | |
@@ -37,28 +39,27 @@ Cadence rule: weekly work produces items only when a tolerance breaks; the month
 
 ## The escalation line
 
-Sales is rarely a licensed activity; its line runs through the legal and finance teams, which brief the licensed professional.
+Sales is rarely a licensed activity. Most of what sits near its line is another team's domain: a **consult**, not an escalation.
 
-| When | Route to | The brief contains |
+| When | Consult | What the question carries |
 |---|---|---|
-| Contract terms beyond the principal's own template: liability, indemnity, IP assignment, exclusivity, non-compete, governing law | legal team, then a corporate or IP lawyer `[US]` or avocat `[FR]` | the draft, the clause, what the client asked, the principal's red lines, the deadline |
-| Any legal document the principal would deliver *to a client* (a data-processing agreement, an AI-use policy) | legal team, then a partner lawyer | `[FR]` drafting for others is a reserved activity (equerry-legal's sources [61]); the brief says what the client needs and by when |
-| A client in the same field as a venture the principal has a role in | legal team: conflict check against the venture map before any proposal | the client's field, the venture, the principal's role there, the work proposed |
-| Prices with VAT, withholding or cross-border invoicing consequences | finance team | the offer, the client's country and status, the proposed price, the currency |
+| Contract terms beyond the principal's own template: liability, indemnity, IP assignment, exclusivity, non-compete, governing law | legal | the draft, the clause, what the client asked, the principal's red lines, the deadline |
+| A client in the same field as a venture the principal has a role in | legal (conflict check against the venture map, before any proposal) | the client's field, the venture, the principal's role there, the work proposed |
+| Prices with VAT, withholding or cross-border invoicing consequences | finance | the offer, the client's country and status, the proposed price, the currency |
+| A comparative or regulated claim in sales material | legal | the claim, its evidence, where it would appear |
+
+| When | Escalate to | The brief contains |
+|---|---|---|
+| Any legal document the principal would deliver *to a client* (a data-processing agreement, an AI-use policy) | a partner lawyer (with a consult to legal for the brief) | `[FR]` drafting for others is a reserved activity (equerry-legal's sources [61]); the brief says what the client needs and by when |
 | `[FR]` Training paid from public or pooled funds | the principal (declaration and certification facts), then the certifying body | the funding route, the training format, the dates |
-| A comparative or regulated claim in sales material | legal team | the claim, its evidence, where it would appear |
+
+A consult is not an escalation: the lead writes `Consult: <team>: <question>` after its coverage block (`equerry-lead`), the calling session runs it as an ask to that team, and that team escalates if its own line is crossed. `escalate` is reserved for a licensed professional or the principal.
 
 Crossing the line turns the deliverable into the brief; the lead does not answer the question itself.
 
 ## Cross-domain events that touch bizdev
 
-The secretary is the directly responsible individual; bizdev owns one item per event.
-
-| Event | Bizdev's item | Other teams opened |
-|---|---|---|
-| New consulting or fractional client | Proposal and SOW per checklist 2, with background IP listed and out-of-scope written; rate from the card | legal (conflict check, MSA and SOW review), finance (tax forms, invoicing, VAT), people (subcontractor papers) |
-| Training engagement in France | Funding route chosen; BPF data captured as delivered (checklist 4) | finance (invoicing), legal (training agreement) |
-| Product launch | Who sells it, at what price, through which offer | product, marketing, legal, engineering, finance |
+The secretary is the directly responsible individual for each event, which opens one item per team. Bizdev's item in each event is the lines tagged `[bizdev]` in `equerry-team/references/cross-domain-events.md`, the only copy of those checklists (source numbers there are the same as in this skill's `references/sources.md`).
 
 ## Review-mode checklist (business concern)
 
@@ -89,4 +90,5 @@ Borrow before hiring: ask the navigator first.
 
 - `references/sources.md`: the starter sources, numbered, each with its URL, use, jurisdiction, kind and last-checked date.
 - `references/checklists.md`: (1) pipeline review with MEDDICC, (2) proposal and SOW outline, (3) rate-card review, (4) French training compliance, (5) new-client event.
+- `references/evals.json`: the seed eval set (three golden asks with the expected verdict and escalation decision), the team's no-regression baseline for G4 and G6.
 - The private references of an instance (its offers, its rate card, its client list) live in `<Teams>/bizdev/references/`, never here.

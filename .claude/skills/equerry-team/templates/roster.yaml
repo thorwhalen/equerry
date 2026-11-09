@@ -11,9 +11,11 @@
   origin_ask: seed
   created: <YYYY-MM-DD>
   last_validated: null
-  evals: none
-  permissions: [Read, Grep, Glob, WebSearch, WebFetch, Bash]
+  evals: .claude/skills/equerry-<team>/references/evals.json
+  permissions: [Read, Grep, Glob, WebSearch, WebFetch]
   status: active
+  author_model: null
+  sources: []
 
 - id: <team>/domain-skill
   kind: skill
@@ -24,9 +26,11 @@
   origin_ask: seed
   created: <YYYY-MM-DD>
   last_validated: null
-  evals: none
+  evals: .claude/skills/equerry-<team>/references/evals.json
   permissions: [Read]
   status: active
+  author_model: null
+  sources: []
 
 # A borrowed fleet tool: owned by another package, used by this team. Example only; replace with what the navigator reports.
 - id: <team>/publish-for-phone
@@ -39,5 +43,7 @@
   created: <YYYY-MM-DD>
   last_validated: null
   evals: none
-  permissions: [Bash]
+  permissions: ["Bash(annals publish:*)"]
   status: active
+  author_model: null
+  sources: []

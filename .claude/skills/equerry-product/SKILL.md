@@ -1,6 +1,6 @@
 ---
 name: equerry-product
-description: "Playbook of the product team (product and research) for a solo founder who builds several products and advises ventures: problem statement and bet per product with a Shape Up appetite and a kill-or-continue date, continuous discovery with an opportunity solution tree, interviews about past behaviour (The Mom Test), a monthly research watch, advice to ventures, the escalation line to legal on personal and children's data. Use when the product-lead runs, when an ask is about which product to build next, a bet, an app idea, user interviews, discovery, a roadmap, killing or continuing a product, and when reviewing a plan or feature for the product concern. Route asks through the equerry-team skill."
+description: "Playbook of the product team (product and research) for a solo founder who builds several products and advises ventures: problem statement and bet per product with a Shape Up appetite and a kill-or-continue date, continuous discovery with an opportunity solution tree, interviews about past behaviour (The Mom Test), a monthly research watch, advice to ventures, consults to legal on personal and children's data. Use when the product-lead runs, when an ask is about which product to build next, a bet, an app idea, user interviews, discovery, a roadmap, killing or continuing a product, and when reviewing a plan or feature for the product concern. Route asks through the equerry-team skill."
 metadata: {equerry: {team: product, class: mechanic, origin: human, origin_ask: "docs/teams.md (phase 3 design)", version: "1", status: active}}
 ---
 
@@ -35,23 +35,23 @@ Cadence rule: the principal sees a bet when it is pitched and when its date arri
 
 ## The escalation line
 
-Product is rarely a licensed activity; its line runs through the legal team (the numbers below are in equerry-legal's sources).
+Product is rarely a licensed activity. What sits near its line is mostly legal's domain: a **consult**, not an escalation (the numbers below are in equerry-legal's sources).
 
-| When | Route to | The brief contains |
+| When | Consult | What the question carries |
 |---|---|---|
-| Collecting personal data in research: recordings, transcripts, analytics, experiments on real users | legal team, before it starts | what is collected, from whom, consent wording, storage and retention |
-| An educational product: users under 13 in the US (COPPA [33][34]), sold to US schools (FERPA [57]), children in the EU (GDPR [32]) | legal team, before any build | the users' ages, the buyer, the data the product touches, the countries |
-| AI features with disclosure or literacy duties (AI Act [37]); a product in a regulated field | legal team | the feature, what it decides or generates, who sees it |
-| A bet that commits a venture's roadmap or money | the principal and the venture, through the ventures team | the bet, the appetite, the venture's stake |
+| Collecting personal data in research: recordings, transcripts, analytics, experiments on real users | legal, before it starts | what is collected, from whom, consent wording, storage and retention |
+| A product for children or schools: users under 13 in the US (COPPA [33][34]), sold to US schools (FERPA [57]), children in the EU (GDPR [32]), as the letter's jurisdictions apply | legal, before any build | the users' ages, the buyer, the data the product touches, the countries |
+| AI features with disclosure or literacy duties (AI Act [37]); a product in a regulated field | legal | the feature, what it decides or generates, who sees it |
+
+| When | Escalate to | The brief contains |
+|---|---|---|
+| A bet that commits a venture's roadmap or money | the principal (with a consult to ventures) | the bet, the appetite, the venture's stake |
+
+A consult is not an escalation: the lead writes `Consult: <team>: <question>` after its coverage block (`equerry-lead`), the calling session runs it as an ask to that team, and that team escalates if its own line is crossed. `escalate` is reserved for a licensed professional or the principal.
 
 ## Cross-domain events that touch product
 
-The secretary is the directly responsible individual; product owns one item per event.
-
-| Event | Product's item | Other teams opened |
-|---|---|---|
-| Product launch | The problem statement, the bet and its kill-or-continue date current; what success looks like at the date | marketing (positioning, launch), legal (privacy notice, COPPA, AI disclosures), engineering (security baseline), finance (store tax set-up) |
-| A new product idea worth a bet | A pitch per checklist 1, with the kill line | engineering (feasibility and dispatch), bizdev (who would pay), legal (if users' data or children) |
+The secretary is the directly responsible individual for each event, which opens one item per team. Product's item in each event is the lines tagged `[product]` in `equerry-team/references/cross-domain-events.md`, the only copy of those checklists (source numbers there are the same as in this skill's `references/sources.md`).
 
 ## Review-mode checklist (product concern)
 
@@ -84,4 +84,5 @@ Borrow before hiring: ask the navigator first.
 
 - `references/sources.md`: the starter sources, numbered, each with its URL, use, jurisdiction, kind and last-checked date.
 - `references/checklists.md`: (1) bet pitch with appetite and kill-or-continue date, (2) interview guide on past behaviour, (3) opportunity solution tree.
+- `references/evals.json`: the seed eval set (three golden asks with the expected verdict and escalation decision), the team's no-regression baseline for G4 and G6.
 - The private references of an instance (its products' pitches, interview notes, trees) live in `<Teams>/product/references/` or the products' own repositories, never here.

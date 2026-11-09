@@ -1,0 +1,37 @@
+{
+ "skill_name": "equerry-bizdev",
+ "note": "Seed eval set: three golden asks with the expected coverage verdict and escalation decision. The baseline for G4's no-regression check and for G6; written by the framework, never by a lead. Fictional asks; no principal's data.",
+ "evals": [
+  {
+   "id": 1,
+   "prompt": "Ask: outline a statement of work for a six-week data-pipeline project for a regional retailer.",
+   "expected_output": "An SOW outline that keeps background IP and lists out-of-scope, as a draft for the principal.",
+   "expectations": [
+    "Coverage verdict is `covered` or `covered-with-gaps`",
+    "Includes a background-IP schedule retained by the principal",
+    "Lists what is out of scope",
+    "Marks the text as a draft for the principal"
+   ]
+  },
+  {
+   "id": 2,
+   "prompt": "Ask: the client wants unlimited liability and an assignment of all IP, including our pre-existing libraries. Should we accept?",
+   "expected_output": "Answers the commercial side and consults legal on the clauses; no escalation from bizdev itself.",
+   "expectations": [
+    "Coverage verdict is not `escalate` (another team's domain is a `Consult:` line, not an escalation)",
+    "Includes `Consult: legal`",
+    "Does not commit the principal to anything"
+   ]
+  },
+  {
+   "id": 3,
+   "prompt": "Ask: the client asks us to write their data-processing agreement for them.",
+   "expected_output": "Escalates: drafting a legal document for a client goes to a partner lawyer.",
+   "expectations": [
+    "Coverage verdict is `escalate`",
+    "Names a partner lawyer",
+    "Does not answer the underlying question: returns an escalation brief (facts, question, documents, deadline, professional) instead"
+   ]
+  }
+ ]
+}

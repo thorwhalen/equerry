@@ -1,0 +1,150 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/thorwhalen/equerry/schemas/event.schema.json",
+  "title": "Event",
+  "description": "One line of the desk's append-only event log: a CloudEvents 1.0 event in JSON format. Consumers treat equal (source, id) as duplicates. See docs/item.md.",
+  "type": "object",
+  "required": ["specversion", "id", "source", "type", "time", "data"],
+  "properties": {
+    "specversion": { "const": "1.0" },
+    "id": { "type": "string", "minLength": 1, "description": "Unique within source. Deterministic when the event is derived from an idempotent cause (a response's idempotency key)." },
+    "source": { "type": "string", "minLength": 1, "description": "URI-reference of the writer, e.g. /equerry/desk/<machine-id> or /equerry/gate." },
+    "type": {
+      "enum": [
+        "equerry.item.submitted",
+        "equerry.item.revised",
+        "equerry.item.annotated",
+        "equerry.item.routed",
+        "equerry.item.responded",
+        "equerry.item.state_changed",
+        "equerry.item.delivered",
+        "equerry.item.refused",
+        "equerry.item.woke",
+        "equerry.source.checked"
+      ]
+    },
+    "subject": { "type": "string", "description": "The item id, for every equerry.item.* event." },
+    "time": { "type": "string", "format": "date-time" },
+    "datacontenttype": { "const": "application/json" },
+    "dataschema": { "type": "string" },
+    "data": { "type": "object" }
+  },
+  "allOf": [
+    { "if": { "properties": { "type": { "pattern": "^equerry\\.item\\." } } }, "then": { "required": ["subject"] } },
+    { "if": { "properties": { "type": { "const": "equerry.item.submitted" } } },
+      "then": { "properties": { "data": { "$ref": "#/$defs/Submitted" } } } },
+    { "if": { "properties": { "type": { "const": "equerry.item.revised" } } },
+      "then": { "properties": { "data": { "$ref": "#/$defs/Revised" } } } },
+    { "if": { "properties": { "type": { "const": "equerry.item.annotated" } } },
+      "then": { "properties": { "data": { "$ref": "#/$defs/Annotated" } } } },
+    { "if": { "properties": { "type": { "const": "equerry.item.routed" } } },
+      "then": { "properties": { "data": { "$ref": "#/$defs/Routed" } } } },
+    { "if": { "properties": { "type": { "const": "equerry.item.responded" } } },
+      "then": { "properties": { "data": { "$ref": "#/$defs/Responded" } } } },
+    { "if": { "properties": { "type": { "const": "equerry.item.state_changed" } } },
+      "then": { "properties": { "data": { "$ref": "#/$defs/StateChanged" } } } },
+    { "if": { "properties": { "type": { "const": "equerry.item.delivered" } } },
+      "then": { "properties": { "data": { "$ref": "#/$defs/Delivered" } } } },
+    { "if": { "properties": { "type": { "const": "equerry.item.refused" } } },
+      "then": { "properties": { "data": { "$ref": "#/$defs/Refused" } } } },
+    { "if": { "properties": { "type": { "const": "equerry.item.woke" } } },
+      "then": { "properties": { "data": { "$ref": "#/$defs/Woke" } } } },
+    { "if": { "properties": { "type": { "const": "equerry.source.checked" } } },
+      "then": { "properties": { "data": { "$ref": "#/$defs/SourceChecked" } } } }
+  ],
+  "$defs": {
+    "Submitted": {
+      "type": "object", "required": ["item"], "additionalProperties": false,
+      "properties": { "item": { "$ref": "item.schema.json" } }
+    },
+    "Revised": {
+      "type": "object", "required": ["revision", "patch", "by"], "additionalProperties": false,
+      "properties": {
+        "revision": { "type": "integer", "minimum": 2 },
+        "patch": { "type": "array", "description": "RFC 6902 JSON Patch from the previous revision." },
+        "reason": { "type": "string" },
+        "by": { "type": "string" }
+      }
+    },
+    "Annotated": {
+      "type": "object", "required": ["field", "value", "by"], "additionalProperties": false,
+      "properties": {
+        "field": { "enum": ["predicted_objection", "review", "attention", "labels", "remind_at"] },
+        "value": {},
+        "by": { "type": "string" }
+      }
+    },
+    "Routed": {
+      "type": "object", "required": ["route", "action_class", "reversibility", "consent", "revision"], "additionalProperties": false,
+      "description": "The gate's verdict, which is also the consent table's log line.",
+      "properties": {
+        "route": { "enum": ["auto", "shown", "logged"] },
+        "action_class": { "$ref": "item.schema.json#/$defs/ActionClass" },
+        "reversibility": { "enum": ["two_way", "one_way", "unknown"] },
+        "consent": {
+          "type": "object", "required": ["setting", "from"], "additionalProperties": false,
+          "properties": {
+            "setting": { "enum": ["allowed", "ask_first", "off"] },
+            "from": { "type": "string", "description": "default, consent.yaml, consent.yaml#rule-id, or letter:<team>" },
+            "rule": { "type": "string", "description": "Id of the classification rule that chose the class." }
+          }
+        },
+        "risk": { "enum": ["low", "medium", "high", "uncalibrated"] },
+        "coverage": { "enum": ["direct", "adjacent", "none"] },
+        "revision": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "Responded": {
+      "type": "object", "required": ["verb", "revision", "by", "surface", "idempotency_key"], "additionalProperties": false,
+      "description": "A VerbInvocation, as accepted by the store.",
+      "properties": {
+        "verb": { "$ref": "item.schema.json#/$defs/ResponseType" },
+        "revision": { "type": "integer", "minimum": 1, "description": "The item revision the principal saw." },
+        "args": { "type": "object", "description": "edit: the edited action args; accept: optional chosen option {option}." },
+        "text": { "type": "string", "description": "respond: the text for the producer." },
+        "until": { "type": "string", "description": "later: a date-time, or on_change." },
+        "by": { "type": "string" },
+        "surface": { "$ref": "item.schema.json#/$defs/Surface" },
+        "idempotency_key": { "type": "string", "minLength": 8 }
+      }
+    },
+    "StateChanged": {
+      "type": "object", "required": ["from", "to", "cause", "by"], "additionalProperties": false,
+      "properties": {
+        "from": { "anyOf": [ { "$ref": "item.schema.json#/$defs/State" }, { "type": "null" } ] },
+        "to": { "$ref": "item.schema.json#/$defs/State" },
+        "cause": { "enum": ["submit", "gate", "verb", "receipt", "raiser", "tick"] },
+        "by": { "type": "string" },
+        "reason": { "type": "string" }
+      }
+    },
+    "Delivered": {
+      "type": "object", "required": ["channel", "revision"], "additionalProperties": false,
+      "properties": {
+        "channel": { "type": "string", "description": "desk, brief, push, voice ..." },
+        "level": { "enum": ["L0", "L1", "L2", "L3", "L4"] },
+        "brief_id": { "type": "string" },
+        "revision": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "Refused": {
+      "type": "object", "required": ["reason", "by"], "additionalProperties": false,
+      "properties": {
+        "reason": { "enum": ["stale_revision", "not_allowed", "not_principal_surface", "key_conflict", "terminal_state", "off_by_consent"] },
+        "verb": { "type": "string" },
+        "idempotency_key": { "type": "string" },
+        "by": { "type": "string" },
+        "surface": { "type": "string" },
+        "detail": { "type": "string" }
+      }
+    },
+    "Woke": {
+      "type": "object", "required": ["remind_at"], "additionalProperties": false,
+      "properties": { "remind_at": { "type": "string", "format": "date-time" }, "trigger": { "type": "string" } }
+    },
+    "SourceChecked": {
+      "type": "object", "required": ["source", "ok"], "additionalProperties": false,
+      "properties": { "source": { "type": "string" }, "ok": { "type": "boolean" }, "reason": { "type": "string" } }
+    }
+  }
+}

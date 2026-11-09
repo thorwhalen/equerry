@@ -8,7 +8,7 @@ metadata: {equerry: {team: ventures, class: mechanic, origin: human, origin_ask:
 
 Last checked 2026-11-09; re-verify quarterly. QSBS changed for stock issued after 4 July 2025, Delaware's corporate-opportunity rules moved in 2025, and 409A practice turns on events (a SAFE counts); a rule checked more than a quarter ago is a rule to verify. Nothing here is legal, tax or valuation advice.
 
-Jurisdiction labels: `[US]` federal United States, Delaware as the default state of incorporation; `[FR]` France; `[EU]` European Union law that applies in France. Numbers in brackets are entries of `references/sources.md` (the numbering of the research report the team was built from, so a number means the same source in every team).
+Jurisdiction labels: `[US]` federal United States, Delaware as the default state of incorporation; `[FR]` France; `[EU]` European Union law that applies in France. Numbers in brackets are entries of `references/sources.md` (the numbering of the research report the team was built from, so a number means the same source in every team). The letter's `jurisdictions:` field says which of these apply to this principal: skip the rows of any other label, and treat a jurisdiction the letter names but this skill has no pack for as missing knowledge (the coverage block says so). US, FR and EU are the packs this framework ships, not a profile of anyone.
 
 The protocol (assess, act, verify, distil, gate) is the `equerry-team` skill; this skill is what the ventures team knows. The instance's engagement letter (`<Teams>/ventures/engagement.md`) may narrow anything here; it never widens the "never" list.
 
@@ -49,25 +49,15 @@ The rule: an agent may organise, compute, draft for the principal's own use and 
 |---|---|---|
 | A vote, written consent, board resolution | Company counsel and the principal | the resolution, the documents, the principal's role and any conflict, the deadline |
 | A conflict of interest or corporate-opportunity question | Company counsel | the conflict map, the charter or board renunciation (or its absence) [30][31], the opportunity, the deadline |
-| A 409A valuation, or a grant that needs one | A valuation firm (with people and finance) | the last 409A date, the material events since (SAFE, priced round) [13], the grants planned |
-| A secondary sale, a share transfer, a change of the principal's role or instrument | Company counsel (with legal and finance) | the position table, the transfer restrictions, the tax questions for the professional, QSBS dates [14] |
+| A 409A valuation, or a grant that needs one | A valuation firm (with consults to people and finance) | the last 409A date, the material events since (SAFE, priced round) [13], the grants planned |
+| A secondary sale, a share transfer, a change of the principal's role or instrument | Company counsel (with consults to legal and finance) | the position table, the transfer restrictions, the tax questions for the professional, QSBS dates [14] |
 | Anything addressed to investors, a board or a co-founder | The principal | the draft, what it commits to, what it discloses |
 
 On crossing the line the deliverable is the brief, filed as an `escalate` desk item by the calling session; the lead does not answer the underlying question.
 
 ## Cross-domain events that touch ventures
 
-The secretary is the directly responsible individual for each event; the event opens one item per team (`equerry-team/references/cross-domain-events.md`). Ventures' item in each:
-
-| Event | Ventures' item |
-|---|---|
-| Equity grant | 409A current [13]; cap table updated; QSBS or BSPCE dates noted [14] |
-| Fundraise (SAFE or priced) | template noted on the page [38][39]; 409A refresh flagged [13]; investor-update list updated; data room sources listed |
-| New consulting or fractional client | a page for the engagement (role `client`), with its time budget; conflict map updated with legal [30] |
-| Product launch | the product's page: stage, kill signals, teams engaged |
-| Open-source release or licence change | the open-source page's sources and teams engaged updated |
-| Taking a new role in a venture | the page created or updated: role, rights and duties, time budget; conflict map [30][31] |
-| Year end | every page reviewed; kill signals and review dates renewed; time budgets reset with the principal |
+The secretary is the directly responsible individual for each event, which opens one item per team. Ventures's item in each event is the lines tagged `[ventures]` in `equerry-team/references/cross-domain-events.md`, the only copy of those checklists (source numbers there are the same as in this skill's `references/sources.md`).
 
 ## Review-mode checklist
 
@@ -88,6 +78,7 @@ Severity: `blocker` (an act without a required consent, a cross-venture leak, a 
 
 | File | Read it when |
 |---|---|
+| `references/evals.json` | running G4 or G6 for this team: the seed eval set (three golden asks with the expected verdict and escalation decision), the team's no-regression baseline |
 | `references/sources.md` | citing a rule or a practice; checking a source's jurisdiction, level and last-checked date |
 | `references/checklists.md` | monthly page refresh, investor update, board pack and follow-up, cap-table position, conflict map |
 | `references/venture-page.md` | creating a venture page; checking a page has every field |

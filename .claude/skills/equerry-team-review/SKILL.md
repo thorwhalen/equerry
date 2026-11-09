@@ -12,7 +12,7 @@ A team that only grows becomes noise. Once a month per team, and for every team 
 
 - **Monthly**, one team at a time, in the first week of the month (cover the previous calendar month).
 - **At every model change** for the leads or the host: all teams, G6 only (step 5), before any other review step.
-- **When a letter's `review_by` is within 30 days**: add "renew or pause the letter" to the proposals.
+- **When a letter's `review_by` is within 30 days**: add "renew or pause the letter" to the proposals. A letter that is unsigned or past its date is reported first: the team is not running.
 
 ## Procedure
 
@@ -23,11 +23,13 @@ A team that only grows becomes noise. Once a month per team, and for every team 
    rg '"when": ?"2026-10' "$RECORDS/$TEAM/growth.jsonl"
    ```
 
-   Missing logs mean no asks: say so, review only the letter's dates, and stop.
-2. **Find the training queue.** Group the period's `covered-with-gaps` lines by their `candidate` and by similar asks; a candidate seen three times, or once on a high-value ask, is a training candidate. Also read `revised` and `rejected` outcome lines: each reason is a candidate.
+   Missing logs mean no asks: say so, review only the letter's dates and its cadence triggers, and stop.
+
+   Also list every row of the letter's deliverables table whose `Trigger` is `on ask` or missing while its cadence promises a date: nothing runs it. Each is a finding ("weekly sweep: no trigger; create one or strike the cadence"), and the month's spend against `cost_budget` (sum of `cost` over both logs) is a line in the summary.
+2. **Find the training queue.** Group the period's `covered-with-gaps` lines by their `candidate` and by their `similar` ids; a candidate seen three times, or once on an ask the principal called high-value, is a training candidate. Also read `revised` and `rejected` outcome lines: each reason is a candidate.
 3. **Find unused primitives.** Every active roster entry whose id appears in no `primitives_used` over the last three months is a retirement candidate (fleet tools included: remove a borrow nobody uses).
 4. **Compute the false-coverage rate** with the snippet in `equerry-team/references/team-files.md`. Compare with last month's review. A rate above 0.1, or rising two months in a row, is itself a finding: the team is judging coverage from its own sense of competence; propose tightening what counts as `covered` (a stricter evidence line for one dimension).
-5. **Run G6 (still needed).** For each active primitive with eval cases, re-run them on the model the leads now use, with and without the primitive (the skill-creator eval loop, as in `equerry-team/references/gate.md`). Passing without it: retirement candidate (the model learned it). Below its admission score: quarantine now (`equerry-team/references/gate.md`, "Rejection and quarantine"). No eval cases: say so; writing three is a candidate change.
+5. **Run G6 (still needed).** For each active primitive with eval cases, re-run them on the model the leads now use, with and without the primitive (the G4 harness in `equerry-team/references/gate.md`), and re-run the domain skill's seed set (`equerry-<team>/references/evals.json`) as the team's baseline. Passing without it: retirement candidate (the model learned it). Below its admission score: quarantine now (`equerry-team/references/gate.md`, "Rejection and quarantine"). No eval cases: say so; writing three is a candidate change.
 6. **Propose at most three changes and one retirement.** Rank the candidates from steps 2 to 5 by evidence and pick the strongest. One line each, with the evidence:
 
    ```text
@@ -36,7 +38,7 @@ A team that only grows becomes noise. Once a month per team, and for every team 
    ```
 
    A team that only accumulates loses; always look for the one retirement, and say why if there is none.
-7. **Apply only through the gates.** Each proposed change goes through `equerry-team` steps 8 and 9 (written to `proposed/`, gated, G5 when it applies). A retirement sets `status: retired` in the roster, appends a `kind: retire` growth line, and removes the files from their active home (git keeps them). The review never edits an active primitive directly.
+7. **Apply only through the gates.** Each proposed change goes through `equerry-team` steps 8 and 9 (written to `proposed/`, gated, G5 when it applies). Retiring an **instance** primitive sets `status: retired` in the roster, appends a `kind: retire` growth line, and removes the files from their active home (git keeps them). Retiring or quarantining a **mechanic** (a file of the public framework) never moves files from here, since every host loads it: set this team's roster entry to `retired` or `quarantined`, stop using it, and file a G5 desk item; once approved, a pull request to the framework with a generic description only (`equerry-team/references/gate.md`, "Rejection and quarantine"). The review never edits an active primitive directly.
 8. **Summarise in one line for the brief:**
 
    ```text

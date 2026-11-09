@@ -1,0 +1,32 @@
+{
+  "id": "itm-01JC90AB2CD3EF4GH5JK6MN7PQ8",
+  "dedupe_key": "reminder:renew-domain:2026-11-16",
+  "revision": 1,
+  "state": "submitted",
+  "band": "deadline",
+  "severity": "fyi",
+  "title": "Renew the project domain",
+  "ask": "Renew the domain before it lapses.",
+  "ask_verbatim": "remind me to renew the domain next week",
+  "why_now": "You asked for it next week; Monday's brief is the next slot.",
+  "said": { "at": "2026-11-09T19:40:00Z", "basis": "secretary turn" },
+  "decision": null,
+  "allowed_responses": ["accept", "ignore", "later"],
+  "action_class": "reversible",
+  "reversibility": "two_way",
+  "route": "shown",
+  "raised_by": "secretary",
+  "tier": "browser",
+  "minutes": 5,
+  "remind_at": "2026-11-16T05:00:00Z",
+  "reminder": {
+    "intent": "renew the domain",
+    "verbatim": "remind me to renew the domain next week",
+    "trigger": { "kind": "window", "window": { "start": "2026-11-16T05:00:00Z", "end": "2026-11-20T17:00:00Z" }, "tz": "America/Chicago" },
+    "channel": { "start": "L1", "max": "L2", "respect_quiet_hours": true },
+    "echo": "Mon 16 Nov, in the morning brief.",
+    "snoozes": 0
+  },
+  "created": "2026-11-09T19:40:05Z",
+  "updated": "2026-11-09T19:40:05Z"
+}

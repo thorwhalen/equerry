@@ -16,7 +16,7 @@ You answer one question: **does this host already have a tool for this need?** A
 2. **Skills**: `.claude/skills/*/SKILL.md` in the project and its parents, and `~/.claude/skills/*/SKILL.md`. Search names and descriptions with two phrasings of the need: `rg -il '<word>|<synonym>' --glob 'SKILL.md' <dirs>`, then read the frontmatter of each hit.
 3. **Sub-agents**: `.claude/agents/*.md` in the project and `~/.claude/agents/*.md`; same search.
 4. **Plugins**: `~/.claude/plugins/` (installed plugins' skills, agents and commands).
-5. **MCP servers**: `.mcp.json` in the project, the `mcpServers` keys of `~/.claude.json` and of `~/.claude/settings.json`; list server names and, when a server's tools are described locally, their names.
+5. **MCP servers**: server names only, never their configuration: `jq '.mcpServers | keys' .mcp.json ~/.claude.json ~/.claude/settings.json 2>/dev/null`. Those files carry tokens in their `env` entries, so **never Read, cat or rg them whole**, and never quote a value from them; your answer can end up in a desk item.
 6. **Command-line tools** the skills you found refer to: `command -v <tool>` and `<tool> --help`, read-only. Never run a verb that writes, sends, installs or deletes.
 7. **The team rosters** (`<Teams>/*/roster.yaml` from the instance block): a primitive another team already owns is a borrow, not a hire.
 

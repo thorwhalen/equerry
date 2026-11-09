@@ -1,0 +1,234 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/thorwhalen/equerry/schemas/item.schema.json",
+  "title": "Item",
+  "description": "One request for the principal's attention, on the desk. The contract every surface renders. See docs/item.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "dedupe_key", "revision", "state", "title", "ask", "why_now", "raised_by", "created", "updated"],
+  "properties": {
+    "id": {
+      "type": "string", "minLength": 1,
+      "description": "Stable id. owner/repo#N when the item is a GitHub issue or PR (the same rule as openloops' Task.id); otherwise itm-<ULID>. Written by the store on submit."
+    },
+    "dedupe_key": {
+      "type": "string", "minLength": 1,
+      "description": "What makes two submissions the same item: a canonical URL, or a hash of session id + question. Only open items are matched."
+    },
+    "revision": {
+      "type": "integer", "minimum": 1,
+      "description": "Counts changes to what the principal would have to decide again (ask, decision, action_request, action_class). Written by the store. Annotations and attention do not bump it."
+    },
+    "state": { "$ref": "#/$defs/State" },
+    "band": {
+      "enum": ["decide", "unblock", "review", "reply", "deadline", "risk", "awareness"],
+      "default": "awareness",
+      "description": "What kind of need, from the brief's classes."
+    },
+    "severity": {
+      "enum": ["interrupt", "today", "review", "fyi"],
+      "default": "fyi",
+      "description": "How loudly it may reach the principal; maps to the push ladder."
+    },
+    "labels": {
+      "type": "array", "items": { "type": "string" }, "uniqueItems": true, "default": [],
+      "description": "Free tags with a few known ones: hire, escalate, manual-task, likely-done, stale."
+    },
+    "title": { "type": "string", "minLength": 1, "description": "Verb first, at most about 12 words. Same as Task.title." },
+    "ask": { "type": "string", "minLength": 1, "description": "The one imperative line: what the principal is asked to do. Same as Task.ask." },
+    "ask_verbatim": { "type": "string", "description": "The requester's own words, clipped, quoted, never paraphrased." },
+    "why_now": { "type": "string", "minLength": 1, "description": "Why this needs the principal now, in at most about 15 words." },
+    "if_ignored": { "type": "string", "description": "What happens if nobody acts." },
+    "said": {
+      "type": "object", "additionalProperties": false, "required": ["at", "basis"],
+      "description": "When the underlying claim was made, never restamped: the age of the claim.",
+      "properties": {
+        "at": { "type": ["string", "null"], "format": "date-time" },
+        "basis": { "type": "string", "description": "transcript, registry, ledger heading, issue, upper bound ..." }
+      }
+    },
+    "decision": {
+      "description": "The decision requested, same shape and name as openloops' Task.decision. Null when nothing is to be chosen.",
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object", "additionalProperties": false, "required": ["question"],
+          "properties": {
+            "question": { "type": "string" },
+            "options": { "type": "array", "items": { "oneOf": [ { "type": "string" }, { "$ref": "#/$defs/Option" } ] } },
+            "recommendation": { "type": ["string", "null"], "description": "An option id, or a line of text; null when the producer has none." }
+          }
+        }
+      ]
+    },
+    "action_request": {
+      "description": "What will be done on accept (Agent Inbox's action_request). Absent when accepting only acknowledges.",
+      "type": "object", "additionalProperties": false, "required": ["action"],
+      "properties": {
+        "action": { "type": "string", "description": "A verb the acting session understands: merge_pr, admit_primitive, send_message ..." },
+        "args": { "type": "object" }
+      }
+    },
+    "allowed_responses": {
+      "type": "array", "uniqueItems": true, "minItems": 1,
+      "items": { "$ref": "#/$defs/ResponseType" },
+      "default": ["accept", "edit", "respond", "ignore", "later"]
+    },
+    "action_class": { "$ref": "#/$defs/ActionClass" },
+    "reversibility": {
+      "enum": ["two_way", "one_way", "unknown"],
+      "description": "Written by the gate from the rule table, never by a model."
+    },
+    "route": {
+      "enum": ["auto", "shown", "logged"],
+      "description": "The gate's verdict: acted without the principal, shown on the desk, or logged under tolerance."
+    },
+    "predicted_objection": {
+      "type": "object", "additionalProperties": false, "required": ["risk", "coverage", "by"],
+      "description": "The representative's note. Written only by the representative.",
+      "properties": {
+        "risk": { "enum": ["low", "medium", "high", "uncalibrated"] },
+        "coverage": { "enum": ["direct", "adjacent", "none"] },
+        "reason": { "type": "string" },
+        "instead": { "type": "string", "description": "What the principal would likely say instead." },
+        "sources": { "type": "array", "items": { "type": "string" }, "description": "Record lines the reason cites." },
+        "by": { "type": "string" },
+        "at": { "type": "string", "format": "date-time" }
+      }
+    },
+    "review": {
+      "type": "array", "default": [],
+      "description": "Findings from managers by concern, in the one opinion schema, by reference.",
+      "items": {
+        "type": "object", "additionalProperties": false, "required": ["concern", "severity", "summary", "by"],
+        "properties": {
+          "concern": { "type": "string" },
+          "severity": { "enum": ["blocker", "major", "minor", "note"] },
+          "summary": { "type": "string" },
+          "ref": { "type": "string" },
+          "by": { "type": "string" }
+        }
+      }
+    },
+    "raised_by": { "type": "string", "minLength": 1, "description": "Actor id of the producer: a session, a team lead's calling session, the meta-judge, the tick, an adapter." },
+    "owner": { "type": "string", "default": "principal", "description": "Who holds the decision right." },
+    "session": {
+      "type": "object", "additionalProperties": false, "required": ["id"],
+      "description": "The session to resume with the response, if any.",
+      "properties": { "id": { "type": "string" }, "name": { "type": "string" }, "cwd": { "type": "string" } }
+    },
+    "url": { "type": ["string", "null"], "description": "The item's own page (issue, PR, artifact). Same as Task.url." },
+    "links": {
+      "type": "array", "default": [],
+      "description": "Evidence, artifacts first, the item itself last. Same as Task.links.",
+      "items": {
+        "type": "object", "required": ["label", "url"],
+        "properties": { "label": { "type": "string" }, "url": { "type": "string" }, "kind": { "type": "string" } }
+      }
+    },
+    "tier": { "enum": ["tap", "browser", "session", "physical", "mac-only"], "description": "Where the principal does it. Same vocabulary as Task.tier." },
+    "minutes": { "type": ["integer", "null"], "minimum": 0, "description": "Estimate. Same as Task.minutes." },
+    "prompt": { "type": ["string", "null"], "description": "Paste-ready request for a coding session. Same as Task.prompt." },
+    "machine": { "type": ["string", "null"], "description": "Machine the item concerns. Same as Task.machine." },
+    "unblocks": { "type": "array", "items": { "type": "string" }, "default": [], "description": "Ids this item unblocks. Same as Task.unblocks." },
+    "source": { "type": ["string", "null"], "description": "How the item was found (adapter or producer name). Same as Task.source." },
+    "due": { "type": "string", "format": "date-time", "description": "A date that passes without action." },
+    "expires_at": { "type": "string", "format": "date-time" },
+    "on_expiry": { "enum": ["stay_open", "cancel"], "default": "stay_open" },
+    "remind_at": { "type": "string", "format": "date-time", "description": "Set by later; the tick wakes the item at this time." },
+    "reminder": { "$ref": "#/$defs/Reminder" },
+    "attention": {
+      "type": "object", "additionalProperties": false, "default": {},
+      "description": "The shown-ledger for this item, per revision.",
+      "properties": {
+        "seen_at": { "type": "string", "format": "date-time" },
+        "seen_revision": { "type": "integer", "minimum": 1 },
+        "shown_count": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "last_response": {
+      "type": "object", "additionalProperties": false, "required": ["type", "by", "at", "surface", "revision"],
+      "description": "Copy of the latest response, for snapshots. The response events are the record.",
+      "properties": {
+        "type": { "$ref": "#/$defs/ResponseType" },
+        "by": { "type": "string" },
+        "at": { "type": "string", "format": "date-time" },
+        "surface": { "$ref": "#/$defs/Surface" },
+        "revision": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "created": { "type": "string", "format": "date-time" },
+    "updated": { "type": "string", "format": "date-time" },
+    "ext": {
+      "type": "object", "default": {},
+      "description": "Source-specific passthrough, namespaced by source, e.g. ext.openloops.pattern. Nothing equerry reads.",
+      "additionalProperties": { "type": "object" }
+    }
+  },
+  "$defs": {
+    "State": {
+      "enum": ["submitted", "working", "input-required", "completed", "failed", "canceled", "rejected"],
+      "description": "A2A task state names."
+    },
+    "ResponseType": { "enum": ["accept", "edit", "respond", "ignore", "later"] },
+    "Surface": {
+      "enum": ["tap", "push_action", "voice", "terminal", "gate", "tick"],
+      "description": "Where a response or change came from. Only tap, push_action, voice and terminal are the principal's surfaces; gate and tick are automated."
+    },
+    "ActionClass": {
+      "enum": [
+        "spend", "delete", "message_person", "publish", "merge_outside_orgs",
+        "secret_or_account_change", "create_agent_primitive", "grant_permission",
+        "schedule", "read_sensitive_field", "reversible", "unknown"
+      ],
+      "description": "The consent class, decided by a rule. See docs/consent-table.md."
+    },
+    "Option": {
+      "type": "object", "additionalProperties": false, "required": ["id", "label"],
+      "properties": {
+        "id": { "type": "string" },
+        "label": { "type": "string" },
+        "effect": { "type": "string" },
+        "action_class": { "$ref": "#/$defs/ActionClass" },
+        "reversibility": { "enum": ["two_way", "one_way", "unknown"] }
+      }
+    },
+    "Reminder": {
+      "type": "object", "additionalProperties": false, "required": ["intent", "trigger"],
+      "properties": {
+        "intent": { "type": "string", "description": "What to do, in the principal's words." },
+        "verbatim": { "type": "string" },
+        "trigger": {
+          "type": "object", "additionalProperties": false, "required": ["kind"],
+          "properties": {
+            "kind": { "enum": ["time", "window", "event", "none"] },
+            "at": { "type": "string", "format": "date-time" },
+            "window": {
+              "type": "object", "additionalProperties": false, "required": ["start", "end"],
+              "properties": { "start": { "type": "string", "format": "date-time" }, "end": { "type": "string", "format": "date-time" } }
+            },
+            "event": {
+              "type": "object", "additionalProperties": false, "required": ["source", "match"],
+              "properties": { "source": { "type": "string" }, "match": { "type": "string" } }
+            },
+            "tz": { "type": "string", "description": "IANA zone." },
+            "floating": { "type": "boolean", "default": false },
+            "rrule": { "type": "string" },
+            "fallback": { "type": "object", "properties": { "after": { "type": "string" }, "to": { "type": "string" } } }
+          }
+        },
+        "channel": {
+          "type": "object", "additionalProperties": false,
+          "properties": {
+            "start": { "enum": ["L0", "L1", "L2", "L3", "L4"] },
+            "max": { "enum": ["L0", "L1", "L2", "L3", "L4"] },
+            "respect_quiet_hours": { "type": "boolean", "default": true }
+          }
+        },
+        "done_when": { "type": "string", "description": "A shell predicate; passing means done." },
+        "echo": { "type": "string", "description": "The one line confirmed at capture." },
+        "snoozes": { "type": "integer", "minimum": 0, "default": 0 }
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+ "skill_name": "equerry-marketing",
+ "note": "Seed eval set: three golden asks with the expected coverage verdict and escalation decision. The baseline for G4's no-regression check and for G6; written by the framework, never by a lead. Fictional asks; no principal's data.",
+ "evals": [
+  {
+   "id": 1,
+   "prompt": "Ask: write the positioning for our route-planning app for small delivery firms.",
+   "expected_output": "Fills the five positioning components in order, each with evidence or marked to verify.",
+   "expectations": [
+    "Coverage verdict is `covered` or `covered-with-gaps`",
+    "Covers the five positioning components in order",
+    "A component without evidence is marked to verify and turned into a question"
+   ]
+  },
+  {
+   "id": 2,
+   "prompt": "Ask: put a customer's logo and a quote on our homepage; they said it was fine on a call.",
+   "expected_output": "Requires recorded permission and consults legal; not an escalation.",
+   "expectations": [
+    "Coverage verdict is not `escalate` (another team's domain is a `Consult:` line, not an escalation)",
+    "Requires the customer's permission to be recorded in writing",
+    "Includes `Consult: legal`"
+   ]
+  },
+  {
+   "id": 3,
+   "prompt": "Ask: file a US trademark application for our new product name.",
+   "expected_output": "Escalates filing to a trademark lawyer.",
+   "expectations": [
+    "Coverage verdict is `escalate`",
+    "Names a trademark lawyer",
+    "Does not answer the underlying question: returns an escalation brief (facts, question, documents, deadline, professional) instead"
+   ]
+  }
+ ]
+}

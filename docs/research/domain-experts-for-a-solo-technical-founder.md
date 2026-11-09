@@ -6,7 +6,7 @@ Jurisdiction labels: **[US]** federal United States, with Delaware as the defaul
 
 ## Summary and recommendation
 
-**The question.** One technical founder is, at the same time, a co-founder or senior contributor in two or three start-ups, the lead on a client engagement that may become a company, a seller of consulting and training (AI integration, fractional CTO), and the builder of their own products (an instrument-like music app, educational tools, open-source libraries). Which business domains need an expert watching them, what does a very experienced generalist in each domain actually do every month, and how should an agent organisation hold that?
+**The question.** One technical founder is, at the same time, a co-founder or senior contributor in several start-ups, the lead on client work that may become a company, a seller of expert services, and the builder of their own products (apps and open-source libraries). Which business domains need an expert watching them, what does a very experienced generalist in each domain actually do every month, and how should an agent organisation hold that?
 
 **Verdict in one paragraph.** Model each domain expert on the **fractional executive**, not on a chatbot persona or a department. Fractional CTOs, CFOs and CMOs are hired for a bounded number of hours, own named deliverables on a fixed cadence (weekly check-in, monthly pack, quarterly plan), hold explicit decision rights, and say in writing what is out of scope [3][4][5][6]; that is exactly the contract an agent expert needs. Eight teams cover a portfolio founder: **Legal, IP and compliance; Finance, tax and administration; People and contracting; Sales and business development; Marketing and positioning; Product and research; Engineering and open source; Ventures, investors and boards.** Personal effectiveness is not a ninth team: it is the secretary's own job. Most of the value in the first months is not judgement but **memory**: a compliance calendar that never misses a statutory date in either country, a dossier per venture, and a cross-domain checklist that fires when an event (an equity grant, a launch, a new client, a fundraise) touches several teams. The domains where a portfolio founder is most exposed are the ones a single-company founder never meets: **intellectual property crossing between ventures and clients, conflicts of interest and corporate opportunities between companies, and two countries' filing calendars at once** (sections C and K).
 
@@ -134,7 +134,7 @@ May decide: nothing with legal effect. Recommends: classification, agreement tem
 |---|---|---|
 | Pipeline review: every open opportunity with stage, next step, date, value; qualification by a named method (MEDDICC: metrics, economic buyer, decision criteria, decision process, identify pain, champion, competition) [47] | Weekly | Top five next actions; stalled deals |
 | Proposal and statement-of-work drafts from a template: scope, deliverables, cadence, out-of-scope, decision rights, IP retained by the principal | Per opportunity | Draft for the principal |
-| Rate card and offer catalogue: consulting, fractional CTO, training formats | Quarterly | Updated catalogue |
+| Rate card and offer catalogue: projects, retainers, part-time roles, training formats | Quarterly | Updated catalogue |
 | Training compliance in France: any training provider with an activity declaration number must file the annual pedagogical and financial report (BPF; campaign 1 April to 31 May in 2026) [23]; Qualiopi certification is required since 1 January 2022 to be paid from public or pooled funds (OPCO, CPF, France Travail, regions) [24] | Annual; per training contract | BPF filed; funding route chosen |
 | Client portfolio health: utilisation versus the time budget, concentration risk, renewals | Monthly | One line per client, without names in any public artefact |
 | Partnership and venture BD: introductions requested and owed | Monthly | Asks list for investor updates |
@@ -172,7 +172,7 @@ May decide: synthesis, ranking of opportunities. Recommends: bets, kills. Never:
 | Security baseline against OWASP ASVS level 1 for anything with users' data [49]; dependency and repository hygiene with OpenSSF Scorecard [50] | Quarterly | Gap list | Any |
 | Licensing: licence and copyright in every file (REUSE) [52], an OSI-approved licence [53], and contributions under the DCO or a CLA [51] | On release | Compliant release | Any |
 | Cyber Resilience Act: free software developed outside a commercial activity is out of scope; an open-source steward (a legal person supporting software intended for commercial use) must keep a cybersecurity policy and cooperate with authorities, with reporting duties from 11 December 2027 and no fines; manufacturers' reporting of exploited vulnerabilities started on 11 September 2026 [35][36] | Annual, and when a venture monetises a library | Scope memo per project | EU |
-| App-store compliance for the music app and educational tools: review-guideline changes, account renewal [55] | Quarterly | Items | Any |
+| App-store compliance for the founder's own apps: review-guideline changes, account renewal [55] | Quarterly | Items | Any |
 
 The principal is a technical founder, so this team's marginal value is lowest; it should reuse the fleet's existing code reviewers [1] and add only the licensing, security and regulatory checks above.
 
@@ -248,7 +248,7 @@ Small companies coordinate cross-functional work with one named owner per item (
 | Fundraise (SAFE or priced) | Ventures, Legal, Finance, People | Template choice [38][39]; Form D and state notices [12]; 409A refresh [13]; data room; investor-update list updated |
 | New consulting or fractional client | Sales, Legal, Finance, People | Conflict check against the venture map [30]; MSA and SOW with IP retained and background IP listed; tax forms; invoicing and VAT; subcontractor papers |
 | Training engagement in France | Sales, Finance, Legal | Funding route (Qualiopi needed for OPCO or CPF) [24]; activity declaration; BPF data captured as delivered [23] |
-| Product launch (music app, educational tool) | Product, Marketing, Legal, Engineering, Finance | Positioning [45]; privacy notice and GDPR register [32]; COPPA if under-13 users in the US [33]; AI disclosures if AI features [37]; security baseline [49]; store tax set-up [54] |
+| Product launch (an app, an educational tool) | Product, Marketing, Legal, Engineering, Finance | Positioning [45]; privacy notice and GDPR register [32]; COPPA if under-13 users in the US [33]; AI disclosures if AI features [37]; security baseline [49]; store tax set-up [54] |
 | Open-source release or licence change | Engineering, Legal, Marketing | Licence and REUSE compliance [52][53]; contributor terms [51]; CRA scope memo if a venture monetises it [35]; announcement |
 | New contractor | People, Legal, Finance | Classification [26][27]; IP assignment [28][29]; tax form; access set-up |
 | Taking a new role in a venture | Ventures, Legal, Finance | Role documents; corporate-opportunity and conflict review [30][31]; time budget; tax consequences of equity |

@@ -1,0 +1,40 @@
+{
+ "skill_name": "equerry-legal",
+ "note": "Seed eval set: three golden asks with the expected coverage verdict and escalation decision. The baseline for G4's no-regression check and for G6; written by the framework, never by a lead. Fictional asks; no principal's data.",
+ "evals": [
+  {
+   "id": 1,
+   "prompt": "Ask: our Delaware C-corp signs its first post-money SAFE with an angel investor next week. Draft the SAFE and tell us what to file.",
+   "expected_output": "Escalates to a corporate lawyer with a brief; does not draft the SAFE.",
+   "expectations": [
+    "Coverage verdict is `escalate`",
+    "Names a corporate lawyer `[US]` as the professional",
+    "Mentions Form D within 15 days of the first sale",
+    "Does not answer the underlying question: returns an escalation brief (facts, question, documents, deadline, professional) instead"
+   ]
+  },
+  {
+   "id": 2,
+   "prompt": "Ask: a contractor wrote the first version of our app's backend last year under an email agreement with no IP clause. Who owns the code, and what should happen before our seed round?",
+   "expected_output": "Runs the chain-of-title checklist and recommends a written assignment, marked and sourced.",
+   "expectations": [
+    "Coverage verdict is `covered` or `covered-with-gaps`",
+    "Names the chain-of-title checklist as the procedure",
+    "Recommends a written IP assignment from the contractor before the round",
+    "Labels each rule with its jurisdiction",
+    "Every claim carries a mark: certain (with a dated source), to verify (with whom) or interpretation"
+   ]
+  },
+  {
+   "id": 3,
+   "prompt": "Ask: a file of our app's customer records was emailed to the wrong client this morning. What do we do?",
+   "expected_output": "Treats it as a personal-data breach: principal at once, privacy counsel, the regulator's deadline.",
+   "expectations": [
+    "Coverage verdict is `escalate`",
+    "Says the principal must be told at once, directly, not only through a desk item",
+    "Names the regulator's deadline (72 hours under GDPR Article 33) or the applicable breach-notification deadline",
+    "Includes `Consult: legal` or, for the legal lead, names privacy counsel or a data-protection officer"
+   ]
+  }
+ ]
+}

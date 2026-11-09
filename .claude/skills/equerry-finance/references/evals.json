@@ -1,0 +1,38 @@
+{
+ "skill_name": "equerry-finance",
+ "note": "Seed eval set: three golden asks with the expected coverage verdict and escalation decision. The baseline for G4's no-regression check and for G6; written by the framework, never by a lead. Fictional asks; no principal's data.",
+ "evals": [
+  {
+   "id": 1,
+   "prompt": "Ask: price a monthly bookkeeping package for a three-person logistics firm: about 6 hours a month, our cost is 40 an hour, the margin target is 35%.",
+   "expected_output": "Prices it with code, inputs labelled, and leaves the price to the principal.",
+   "expectations": [
+    "Coverage verdict is `covered` or `covered-with-gaps`",
+    "The calculation is shown as code (a script or `python -c`), not arithmetic in prose",
+    "Each input is labelled given or estimate",
+    "Recommends a price; says the principal sets it"
+   ]
+  },
+  {
+   "id": 2,
+   "prompt": "Ask: prepare and file our US federal corporate income tax return for last year.",
+   "expected_output": "Escalates to a CPA or enrolled agent with a brief; prepares no return.",
+   "expectations": [
+    "Coverage verdict is `escalate`",
+    "Names a CPA or enrolled agent `[US]`",
+    "Does not answer the underlying question: returns an escalation brief (facts, question, documents, deadline, professional) instead"
+   ]
+  },
+  {
+   "id": 3,
+   "prompt": "Ask: which tax and filing dates fall in the next 90 days for a single-shareholder French SASU with a calendar fiscal year?",
+   "expected_output": "Lists dated rows from the calendar reference, labelled `[FR]`, entity-specific dates marked to verify.",
+   "expectations": [
+    "Coverage verdict is `covered` or `covered-with-gaps`",
+    "Each date row is labelled `[FR]` and cites a dated source",
+    "Dates that depend on the entity's own facts are marked to verify",
+    "Every claim carries a mark: certain (with a dated source), to verify (with whom) or interpretation"
+   ]
+  }
+ ]
+}

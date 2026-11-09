@@ -72,23 +72,25 @@ The lead never codes and never spawns. Build work leaves the team as a brief the
 
 ## The escalation line
 
-Engineering is rarely a licensed activity; its line runs through the legal team (and finance for store taxes).
+Engineering is rarely a licensed activity. What sits near its line is mostly legal's or finance's domain: a **consult**, not an escalation.
 
-| When | Route to | The brief contains |
+| When | Consult | What the question carries |
 |---|---|---|
-| A licence change on a released project; relicensing; adopting a CLA | legal team, then an IP lawyer | the project, current and proposed licence, contributors and their terms, the reason |
-| A venture monetises a library: manufacturer or open-source steward under the CRA, and its duties | legal team | the scope memo (checklist 4) |
-| A security incident touching users' personal data | legal team at once, and the principal | what happened, when it was found, what data, which users, which countries |
-| App-store agreements, store tax set-up, export questions | legal and finance teams | the store, the product, the countries |
+| Adopting a CLA; reading what a licence allows | legal | the project, the licence, contributors and their terms |
+| A venture monetises a library: manufacturer or open-source steward under the CRA, and its duties | legal | the scope memo (checklist 4) |
+| App-store agreements, export questions | legal | the store, the product, the countries |
+| Store tax set-up | finance | the store, the product, the countries |
+
+| When | Escalate to | The brief contains |
+|---|---|---|
+| A security incident touching users' personal data | **the principal at once, directly** (the calling session interrupts the principal; a desk item alone is too slow), with a consult to legal, which owns the breach brief and the regulator's deadline (72 hours under GDPR Article 33 `[EU]`) | what happened, when it was found, what data, which users, which countries |
+| A licence change on a released project; relicensing | an IP lawyer (with a consult to legal) | the project, current and proposed licence, contributors and their terms, the reason |
+
+A consult is not an escalation: the lead writes `Consult: <team>: <question>` after its coverage block (`equerry-lead`), the calling session runs it as an ask to that team, and that team escalates if its own line is crossed. `escalate` is reserved for a licensed professional or the principal.
 
 ## Cross-domain events that touch engineering
 
-The secretary is the directly responsible individual; engineering owns one item per event.
-
-| Event | Engineering's item | Other teams opened |
-|---|---|---|
-| Product launch | Security baseline (checklist 2) on what ships; the release gated by the code and security reviewers; store compliance (checklist 5) for an app | product, marketing, legal, finance |
-| Open-source release or licence change | Checklist 1; contributor terms; a CRA scope memo if a venture monetises it | legal, marketing |
+The secretary is the directly responsible individual for each event, which opens one item per team. Engineering's item in each event is the lines tagged `[engineering]` in `equerry-team/references/cross-domain-events.md`, the only copy of those checklists (source numbers there are the same as in this skill's `references/sources.md`).
 
 ## Review-mode checklist (engineering concern)
 
@@ -107,4 +109,5 @@ Run on a plan or a diff. Route what a host reviewer owns to it; each failure her
 
 - `references/sources.md`: the starter sources, numbered, each with its URL, use, jurisdiction, kind and last-checked date.
 - `references/checklists.md`: (1) release licensing, (2) ASVS level 1 basics, (3) OpenSSF Scorecard, (4) CRA scope memo, (5) app-store renewal and guideline check.
+- `references/evals.json`: the seed eval set (three golden asks with the expected verdict and escalation decision), the team's no-regression baseline for G4 and G6.
 - The private references of an instance (its repositories, which ones a venture monetises, its own fleet's reviewers) live in `<Teams>/engineering/references/`, never here.

@@ -1,6 +1,6 @@
 ---
 name: equerry-legal
-description: "The legal team's playbook (legal, IP and compliance) for a founder who holds roles in several ventures and serves clients, in the US and France: recurring tasks with cadence, what the team may decide, recommends and never does, the escalation line to a lawyer or avocat, the cross-domain events it joins, a review-mode checklist and dated references. Preloaded by the legal-lead sub-agent. Load it directly for 'ask legal', IP ownership, chain of title, contract register, conflict of interest between roles, Delaware franchise tax, Form D, accounts approval and greffe filing, GDPR register, COPPA, FERPA, AI Act, CRA scope, trademark maintenance, or a privacy-legal review of a plan, a launch or a diff."
+description: "The legal team's playbook (legal, IP and compliance) for a founder who holds roles in several ventures and serves clients, in the jurisdictions its engagement letter names (reference packs for the US, France and the EU ship with it): recurring tasks with cadence, what the team may decide, recommends and never does, the escalation line to a lawyer or avocat, the cross-domain events it joins, a review-mode checklist and dated references. Preloaded by the legal-lead sub-agent. Load it directly for 'ask legal', IP ownership, chain of title, contract register, conflict of interest between roles, Delaware franchise tax, Form D, French accounts approval and greffe filing, GDPR register, COPPA, FERPA, AI Act, CRA scope, trademark maintenance, or a privacy-legal review of a plan, a launch or a diff."
 metadata: {equerry: {team: legal, class: mechanic, origin: human, origin_ask: "docs/teams.md", version: "1", status: active}}
 ---
 
@@ -8,7 +8,7 @@ metadata: {equerry: {team: legal, class: mechanic, origin: human, origin_ask: "d
 
 Last checked 2026-11-09; re-verify quarterly. Several rules below changed between 2024 and 2026 (beneficial ownership, COPPA, the AI Act, the CRA) and will change again. Nothing here is legal advice: the team explains, organises, drafts for the principal's own use and briefs the professional.
 
-Jurisdiction labels: `[US]` federal United States, Delaware as the default state of incorporation; `[FR]` France; `[EU]` European Union law that applies in France. Numbers in brackets are entries of `references/sources.md` (the numbering of the research report the team was built from, so a number means the same source in every team).
+Jurisdiction labels: `[US]` federal United States, Delaware as the default state of incorporation; `[FR]` France; `[EU]` European Union law that applies in France. Numbers in brackets are entries of `references/sources.md` (the numbering of the research report the team was built from, so a number means the same source in every team). The letter's `jurisdictions:` field says which of these apply to this principal: skip the rows of any other label, and treat a jurisdiction the letter names but this skill has no pack for as missing knowledge (the coverage block says so). US, FR and EU are the packs this framework ships, not a profile of anyone.
 
 The protocol (assess, act, verify, distil, gate) is the `equerry-team` skill; this skill is what the legal team knows. The instance's engagement letter (`<Teams>/legal/engagement.md`) may narrow anything here; it never widens the "never" list.
 
@@ -51,28 +51,17 @@ The rule: an agent may explain, organise, draft for the principal's own use and 
 |---|---|---|
 | Any financing (SAFE, convertible, priced round), equity plan, M&A, secondary sale | Corporate lawyer `[US]`; avocat `[FR]` | entity and jurisdiction; the instrument and the template proposed [38][39]; cap-table position; dates triggered (Form D [12], 409A, 83(b)); open questions; the term sheet or draft |
 | A dispute, demand letter or threatened claim | Litigation counsel in the jurisdiction | facts in date order; the documents; deadlines to respond; what the principal wants |
-| Termination of anyone's engagement | Employment lawyer (with the people team) | classification note; the agreement; IP and data still to return; notice terms |
-| A regulatory filing with penalties; a cross-border structure | Corporate lawyer and the finance team's accountant | entities, jurisdictions, the filing, the deadline, the penalty at stake |
+| Termination of anyone's engagement | Employment lawyer (with a consult to people) | classification note; the agreement; IP and data still to return; notice terms |
+| A regulatory filing with penalties; a cross-border structure | Corporate lawyer and the accountant (with a consult to finance) | entities, jurisdictions, the filing, the deadline, the penalty at stake |
 | A licence change on a released project | IP lawyer (with the engineering team) | current licence; contributors and their terms (DCO or CLA); who owns what; the reason for the change |
+| A personal-data breach: data lost, leaked, or reached by someone not entitled to it (reported by any team) | **The principal at once, directly** (the calling session interrupts the principal in the conversation; a desk item alone is too slow), then the data-protection officer or privacy counsel | what happened and when it was found (the clock starts at awareness); what data, whose, how many people, which countries; whether the data was encrypted; the regulator's deadline: 72 hours to the supervisory authority under GDPR Article 33 `[EU]` (CNIL `[FR]`), the state breach-notification law's deadline `[US]`; whether the people affected must be told (Article 34) |
 | A legal document requested by a client (data-processing agreement, AI-use policy) | A partner lawyer | the client's request; the engagement it belongs to; the deadline; the fact that drafting for others is reserved `[FR]` [61] |
 
 On crossing the line the deliverable is the brief, filed as an `escalate` desk item by the calling session; the lead does not answer the underlying question.
 
 ## Cross-domain events that touch legal
 
-The secretary is the directly responsible individual for each event; the event opens one item per team (`equerry-team/references/cross-domain-events.md`). Legal's item in each:
-
-| Event | Legal's item |
-|---|---|
-| Equity grant | board approval on file; grant documents from counsel; 83(b) or BSPCE conditions noted for the people team [11] |
-| Fundraise (SAFE or priced) | template choice [38][39]; Form D and state notices [12]; the brief to counsel |
-| New consulting or fractional client | conflict check against the venture map [30][31]; MSA and SOW with IP retained and a background-IP schedule |
-| Training engagement in France | the training contract; the activity declaration on file (with bizdev and finance) |
-| Product launch | privacy notice and GDPR register [32]; COPPA if under-13 users in the US [33]; FERPA if sold to US schools [57]; AI Act disclosures if AI features [37] |
-| Open-source release or licence change | licence and contributor terms reviewed with engineering; CRA scope memo if a venture monetises the project [35][36] |
-| New contractor | IP assignment in the agreement, with the people team [28][29] |
-| Taking a new role in a venture | the role documents; corporate-opportunity and conflict review [30][31] |
-| Year end | next year's calendar generated from `references/calendar.md` and the venture pages; letters renewed |
+The secretary is the directly responsible individual for each event, which opens one item per team. Legal's item in each event is the lines tagged `[legal]` in `equerry-team/references/cross-domain-events.md`, the only copy of those checklists (source numbers there are the same as in this skill's `references/sources.md`).
 
 ## Review-mode checklist
 
@@ -95,6 +84,7 @@ Severity: `blocker` (a no-cure miss, a binding act, a reserved activity), `major
 
 | File | Read it when |
 |---|---|
+| `references/evals.json` | running G4 or G6 for this team: the seed eval set (three golden asks with the expected verdict and escalation decision), the team's no-regression baseline |
 | `references/sources.md` | citing a rule; checking a source's jurisdiction, level and last-checked date |
 | `references/checklists.md` | chain of title, conflict check, contract register, regulatory watch |
 | `references/calendar.md` | the weekly sweep; adding a date; year-end roll-forward |

@@ -1,6 +1,6 @@
 ---
 name: equerry-marketing
-description: "Playbook of the marketing team (marketing and positioning) for a solo founder with several offers and products: positioning per offer with April Dunford's five components, a small publishing rhythm, customer evidence with permission recorded, launch checklists, a monthly scorecard, the voice rule (every outgoing text through acquaint-write and deslop, checked with ductus), the escalation line to legal on claims. Use when the marketing-lead runs, when an ask is about positioning, messaging, a launch, content, a post, a talk, a README as marketing, customer quotes, channels or a name, and when reviewing a plan or page for the marketing concern. Route asks through the equerry-team skill."
+description: "Playbook of the marketing team (marketing and positioning) for a solo founder with several offers and products: positioning per offer with April Dunford's five components, a small publishing rhythm, customer evidence with permission recorded, launch checklists, a monthly scorecard, the voice rule (every outgoing text through acquaint-write and deslop, checked with ductus), consults to legal on claims. Use when the marketing-lead runs, when an ask is about positioning, messaging, a launch, content, a post, a talk, a README as marketing, customer quotes, channels or a name, and when reviewing a plan or page for the marketing concern. Route asks through the equerry-team skill."
 metadata: {equerry: {team: marketing, class: mechanic, origin: human, origin_ask: "docs/teams.md (phase 3 design)", version: "1", status: active}}
 ---
 
@@ -40,24 +40,24 @@ Every outgoing text is the principal's, not a model's. A draft for a known reade
 
 ## The escalation line
 
-Marketing is rarely a licensed activity; its line runs through the legal team.
+Marketing is rarely a licensed activity. What sits near its line is legal's domain: a **consult**, not an escalation.
 
-| When | Route to | The brief contains |
+| When | Consult | What the question carries |
 |---|---|---|
-| A public claim about a client; a customer quote, logo or case study | legal team | the claim or quote, where it will appear, the permission record |
-| A comparative claim, a performance or safety claim, a claim about AI features or about a product for children | legal team | the claim, its evidence, the audience, the jurisdictions |
-| A new product or company name | brand's tools for availability, then legal for trademark clearance; a trademark lawyer to file | the name, the classes of goods and services, the countries, the results of the availability screen |
-| Collecting personal data for marketing (lists, analytics, tracking) | legal team, before it starts | what is collected, from whom, where it is stored, the lawful basis proposed |
+| A public claim about a client; a customer quote, logo or case study | legal | the claim or quote, where it will appear, the permission record |
+| A comparative claim, a performance or safety claim, a claim about AI features or about a product for children | legal | the claim, its evidence, the audience, the jurisdictions |
+| A new product or company name | legal, for trademark clearance, after the host's naming tools screened availability | the name, the classes of goods and services, the countries, the results of the availability screen |
+| Collecting personal data for marketing (lists, analytics, tracking) | legal, before it starts | what is collected, from whom, where it is stored, the lawful basis proposed |
+
+| When | Escalate to | The brief contains |
+|---|---|---|
+| Filing a trademark | a trademark lawyer | the name, the classes, the countries, legal's clearance answer |
+
+A consult is not an escalation: the lead writes `Consult: <team>: <question>` after its coverage block (`equerry-lead`), the calling session runs it as an ask to that team, and that team escalates if its own line is crossed. `escalate` is reserved for a licensed professional or the principal.
 
 ## Cross-domain events that touch marketing
 
-The secretary is the directly responsible individual; marketing owns one item per event.
-
-| Event | Marketing's item | Other teams opened |
-|---|---|---|
-| Product launch | Positioning page current [45]; launch checklist (checklist 1); announcement drafted | product, legal, engineering, finance |
-| Open-source release or licence change | Release notes and announcement; README as the library's landing page | engineering, legal |
-| New consulting or training offer | Positioning page for the offer; where it will be said | bizdev, finance |
+The secretary is the directly responsible individual for each event, which opens one item per team. Marketing's item in each event is the lines tagged `[marketing]` in `equerry-team/references/cross-domain-events.md`, the only copy of those checklists (source numbers there are the same as in this skill's `references/sources.md`).
 
 ## Review-mode checklist (marketing concern)
 
@@ -90,4 +90,5 @@ Borrow before hiring: ask the navigator first.
 - `references/sources.md`: the starter sources, numbered, each with its URL, use, jurisdiction, kind and last-checked date.
 - `references/positioning.md`: the five-component positioning page to fill in, the publishing rhythm, the voice rule.
 - `references/checklists.md`: (1) launch checklist, (2) customer-evidence log, (3) monthly scorecard.
+- `references/evals.json`: the seed eval set (three golden asks with the expected verdict and escalation decision), the team's no-regression baseline for G4 and G6.
 - The private references of an instance (its offers' positioning pages, its evidence log, its channel accounts) live in `<Teams>/marketing/references/`, never here.

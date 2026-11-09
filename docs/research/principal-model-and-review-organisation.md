@@ -18,7 +18,7 @@ Research report, standard depth, 2026-11-09. Design question only: no private ma
 
 ## What already exists in the fleet
 
-- An earlier report on LLM-as-judge and reference-free quality estimation covers judge biases, judge validation against humans, panels of judges and the `signal -> calibrate -> decide` pipeline in depth: `$PP/t/ek/misc/docs/ek_09 -- LLM-as-Judge & Reference-Free Agent Quality Estimation.md`. This report does not re-derive it; its rule "never gate on an uncalibrated signal" applies directly to theme A.
+- An earlier report on LLM-as-judge and reference-free quality estimation covers judge biases, judge validation against humans, panels of judges and the `signal -> calibrate -> decide` pipeline in depth (report 9 of the `ek` evaluation package's docs, "LLM-as-Judge & Reference-Free Agent Quality Estimation"). This report does not re-derive it; its rule "never gate on an uncalibrated signal" applies directly to theme A.
 - The `acquaint` package already simulates how a known person reads a draft from a brief built out of their own writing (its profile and recipient-reader workflow). It is the nearest in-fleet component to theme A, and a principal model is plausibly the same mechanism pointed at the operator. This is an observation about fit, not a verified design decision.
 
 ## A. Principal and user preference modelling for delegated decisions

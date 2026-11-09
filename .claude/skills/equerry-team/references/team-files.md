@@ -24,10 +24,12 @@ A YAML list. Field by field:
 | `origin` | `human`, `agent`, `imported` |
 | `origin_ask` | the coverage entry id or issue URL that caused it; `seed` for the first roster |
 | `created` | ISO date |
-| `last_validated` | `{date, model, pass, baseline}`: the last G4 or G6 run, the model that ran it, its pass rate and the without-primitive baseline; `null` until first run |
-| `evals` | the path to its eval cases, or `none` |
-| `permissions` | the tool names it needs; compared with the letter's `permissions_ceiling` |
+| `last_validated` | `{date, model, pass, baseline}`: the last G4 or G6 run, the model that ran it, its pass rate and the without-primitive baseline; `null` until first run (a human-seeded primitive is then validated per ask by the checker against its named checklist) |
+| `evals` | the path to its eval cases (`<Teams>/<team>/evals/<name>.json` for an admitted primitive; the domain skill's `references/evals.json` seed set for the lead and the domain skill), or `none` |
+| `permissions` | the tool names it needs, `Bash` only as command patterns (`Bash(<command>:*)`); compared with the letter's `permissions_ceiling` |
 | `status` | `proposed`, `active`, `quarantined`, `retired` |
+| `author_model` | the model that wrote it (`claude-opus-...`), or `null` for a primitive a person wrote; a primitive distilled by a lead always has one, so a later review can tell what a model wrote about itself |
+| `sources` | the dated sources and the evidence it was distilled from (paths, URLs, the coverage ids), or `[]` |
 | `keep` | optional: a one-line note by the principal; the team review never retires a primitive that has one |
 
 ```yaml
@@ -40,38 +42,42 @@ A YAML list. Field by field:
   origin_ask: seed
   created: 2026-11-09
   last_validated: null
-  evals: none
-  permissions: [Read, Bash]
+  evals: .claude/skills/equerry-finance/references/evals.json
+  permissions: [Read]
   status: active
+  author_model: null
+  sources: []
 ```
 
 ## Coverage log
 
-One line per ask, written by the calling session once the verdict is final (after G0 for a gap). Keys, in this order:
+One line per ask, written by the calling session at step 10 (when the verdict, the check and the primitives used are all known), or at step 3 for an `escalate`. Keys, in this order:
 
 | Field | Meaning |
 |---|---|
-| `id` | `<team>-<YYYYMMDD>-<n>` |
+| `id` | `<team>-<YYYYMMDD>-<HHMM>`, the time the ask was framed |
 | `when` | ISO date and local time, `2026-11-09T21:40` |
 | `team` | the owner team |
 | `ask` | the framed ask, one line, neutral |
 | `verdict` | `covered`, `covered-with-gaps`, `train`, `hire`, `escalate` |
 | `procedure` | evidence that the team knows the steps: the primitive, or `none` |
-| `quality` | what the result was checked against and how it did; `unverified` after two failed checks |
+| `quality` | a list, one entry per check that ran at step 7, with its last round's numbers: `{"check": <what ran, against which checklist or test>, "pass": <items passed>, "total": <items checked>}`. The work is unverified when an entry has `pass` below `total` after the second round; contradictor only is `[{"check": "contradictor", "pass": null, "total": null}]`; `[]` for an `escalate` |
 | `knowledge` | the references used, their dates and jurisdictions; what was stale or missing |
 | `context` | the dossier fields and venture pages needed; present or missing |
 | `authority` | the letter's right that applied (may decide, recommends, agree, never) and whether the escalation line was crossed |
 | `primitives_used` | list of roster ids |
-| `candidate` | for `covered-with-gaps` after a G0 refusal, what would have been grown (one line); otherwise `null` |
+| `similar` | the coverage ids of earlier similar asks, as the lead confirmed them; `[]` if none |
+| `candidate` | for every `covered-with-gaps` (whether the lead judged it so or G0 refused growth), what would have closed the gap, one line, from the lead's `Candidate` line; otherwise `null` |
+| `cost` | `{"agent_calls": <n>, "tokens": <n or null>}` spent on this ask; summed against the letter's `cost_budget` |
 
 ```json
-{"id": "legal-20261110-1", "when": "2026-11-10T09:15", "team": "legal", "ask": "Does the standard client agreement keep background IP with the consultancy?", "verdict": "covered-with-gaps", "procedure": "equerry-legal contract-register checklist", "quality": "checker against checklists.md#contract-register, pass", "knowledge": "no reference on background-IP clauses; two sources found, dated 2026-11-10", "context": "venture page consultancy: agreement template linked", "authority": "recommends; escalation line not crossed", "primitives_used": ["legal/contract-register"], "candidate": "reference: background-IP clause patterns (second similar ask)"}
+{"id": "legal-20261110-0915", "when": "2026-11-10T09:15", "team": "legal", "ask": "Does the standard client agreement keep background IP with the studio?", "verdict": "covered-with-gaps", "procedure": "equerry-legal contract-register checklist", "quality": [{"check": "checker: equerry-legal checklists.md#contract-register", "pass": 7, "total": 7}, {"check": "test: clause list matches the template", "pass": 1, "total": 1}], "knowledge": "no reference on background-IP clauses; two sources found, dated 2026-11-10", "context": "venture page studio: agreement template linked", "authority": "recommends; escalation line not crossed", "primitives_used": ["legal/contract-register"], "similar": ["legal-20261021-1402"], "candidate": "reference: background-IP clause patterns", "cost": {"agent_calls": 2, "tokens": null}}
 ```
 
 **Outcome lines.** The log is append-only, so the outcome is a second line with the same `id`: `{"id": ..., "when": ..., "outcome": "accepted" | "revised" | "rejected", "note": <one line>}`. A reader merges lines by `id`, the later line winning. A `revised` or `rejected` outcome with a reason is a training candidate.
 
 ```json
-{"id": "legal-20261110-1", "when": "2026-11-12T18:02", "outcome": "revised", "note": "principal wants the carve-out for pre-existing libraries named explicitly"}
+{"id": "legal-20261110-0915", "when": "2026-11-12T18:02", "outcome": "revised", "note": "principal wants the carve-out for pre-existing libraries named explicitly"}
 ```
 
 ## Growth log
@@ -91,11 +97,11 @@ One line per event. A proposal produces a `proposed` line when it is written to 
 | `evidence` | where the checked deliverable is (a path, a published page, an issue) |
 | `gates` | each gate's result and numbers, `{"G0": "pass: third similar ask", "G2": "pass", "G4": "0.9 vs 0.6", "G5": "pending <issue url>"}` |
 | `status` | `proposed`, `admitted`, `rejected`, `withdrawn`, `retired`, `quarantined` |
-| `approved_by` | `gate` or `principal`; `null` while pending |
-| `cost` | `{"tokens": <n or null>, "minutes": <n>}` spent growing |
+| `approved_by` | `gate` (instance primitives without G5), `principal (in session)` with the quoted message and its time, or `principal (desk comment)` with the comment URL; `null` while pending |
+| `cost` | `{"agent_calls": <n>, "tokens": <n or null>, "minutes": <n>}` spent growing (checker eval writing and G4 runs included) |
 
 ```json
-{"when": "2026-11-10T10:05", "team": "legal", "kind": "train", "primitive": "legal/contract-register", "class": "mechanic", "from_version": "1", "to_version": "2", "ask": "legal-20261110-1: background IP in the client agreement", "coverage_ref": "legal-20261110-1", "evidence": "teams/legal/proposed/contract-register-v2/proposal.md", "gates": {"G0": "pass: high value", "G1": "pass", "G2": "pass", "G4": "pending"}, "status": "proposed", "approved_by": null, "cost": {"tokens": null, "minutes": 12}}
+{"when": "2026-11-10T10:05", "team": "legal", "kind": "train", "primitive": "legal/contract-register", "class": "mechanic", "from_version": "1", "to_version": "2", "ask": "legal-20261110-0915: background IP in the client agreement", "coverage_ref": "legal-20261110-0915", "evidence": "teams/legal/proposed/contract-register-v2/proposal.md", "gates": {"G0": "pass: third similar ask (legal-20261021-1402, legal-20261104-1130)", "G1": "pass", "G2": "pass", "G4": "pending", "G5": "pending"}, "status": "proposed", "approved_by": null, "cost": {"agent_calls": 3, "tokens": null, "minutes": 12}}
 ```
 
 ## Primitive frontmatter
@@ -103,8 +109,10 @@ One line per event. A proposal produces a `proposed` line when it is written to 
 Every skill or sub-agent a team owns carries the same facts as its roster entry, so the roster can later be generated from the files rather than kept by hand:
 
 ```yaml
-metadata: {equerry: {team: legal, class: mechanic, origin: agent, origin_ask: "legal-20261110-1", version: "2", status: active}}
+metadata: {equerry: {team: legal, class: mechanic, origin: agent, origin_ask: "legal-20261110-0915", version: "2", status: active, author_model: "<model id>", sources: ["legal-20261110-0915"]}}
 ```
+
+`author_model` and `sources` are required when `origin: agent` and optional for a primitive a person wrote.
 
 `team: all` marks a primitive shared by every team (the protocol, council and review skills); changing one is a change to a shared mechanic and needs G5. A reference or checklist file that has no frontmatter records the same facts in its roster entry only.
 

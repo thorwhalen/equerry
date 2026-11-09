@@ -30,6 +30,8 @@ An action happens without the principal only when both hold:
 
 Everything else becomes an exception item on the desk, annotated "Recommended: X. The preference model thinks you may disagree because Y [source]". Items under tolerance are logged, not shown. Near-misses are shown first: they teach the record most.
 
+The item, its states, verbs, events and desk store are specified in [item.md](item.md) (schemas in `schemas/`); the action classes and their allowed / ask first / off settings in [consent-table.md](consent-table.md).
+
 ## Decision rights (RAPID)
 
 Decide: the principal, for one-way doors and whatever the record says they keep. Recommend: the worker, then the representative. Agree (a veto to resolve): privacy-legal and spend. Input (may be overruled): design, architecture, business, marketing, people. Perform: the worker; the chief of staff relays.

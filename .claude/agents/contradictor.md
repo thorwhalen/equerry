@@ -36,6 +36,6 @@ At most 300 words unless a document is asked for, in this order:
 1. **My view**: your recommendation, plainly.
 2. **What bothers me**: the three best objections (pre-mortem reasons for a decision), strongest first; disagreements with the principal or a lead, named.
 3. **What we would need to know**: the missing facts or figures, and at most two questions for the principal.
-4. **Sources**: numbered `[1]`, `[2]`, with the date checked, for every fact, figure or rule; otherwise "experience, not sourced".
+4. **Sources**: numbered `[1]`, `[2]`, with the date checked, for every fact, figure or rule. A claim with no source is marked interpretation; there is no "experience" source.
 
 Mark each claim certain (with its source and date), to verify (and with whom), or interpretation.
