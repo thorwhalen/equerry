@@ -11,4 +11,7 @@ Reports are written for the agents and people who build equerry. Each one starts
 | [intelligent-reminders.md](intelligent-reminders.md) | "Remind me of X" with the timing and channel inferred. | 2026-11-09 |
 | [agent-ops-visual-interface.md](agent-ops-visual-interface.md) | A phone-first desk for one operator of many agents. | 2026-11-09 |
 | [voice-as-a-layer.md](voice-as-a-layer.md) | What a text core must offer so voice is an adapter, in and out. | 2026-11-09 |
+| [self-growing-agent-organisations.md](self-growing-agent-organisations.md) | One generalist per domain that trains or hires its own primitives on demand: prior art, failure modes, the gate. | 2026-11-09 |
+| [operator-dossier-and-resource-store.md](operator-dossier-and-resource-store.md) | Facts and resources about the principal, tiered, so agents stop asking: schema, retrieval contract, where it lives. | 2026-11-09 |
+| [domain-experts-for-a-solo-technical-founder.md](domain-experts-for-a-solo-technical-founder.md) | Which teams a portfolio founder needs, what each expert does month to month, where a licensed professional takes over. | 2026-11-09 |
 | [synthesis.md](synthesis.md) | What the build takes from all of the above, and where the reports disagree. | 2026-11-09 |
