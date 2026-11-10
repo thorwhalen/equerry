@@ -47,7 +47,8 @@ classify:
   - {id: publish_private,   action: publish_page,      class: reversible}
   - {id: send_message,      action: send_message,      class: message_person}
   - {id: comment_outside,   action: comment,           when: "args.owner not in own_orgs",    class: message_person}
-  - {id: comment_own,       action: comment,           class: reversible}
+  - {id: comment_own,       action: comment,           when: "args.visibility in ['private', 'internal']", class: reversible}
+  - {id: comment_public,    action: comment,           class: message_person}   # an own repository with outside readers, or visibility not given
   - {id: delete,            action: delete,            class: delete}
   - {id: pay,               action: pay,               class: spend}
   - {id: set_secret,        action: set_secret,        class: secret_or_account_change}

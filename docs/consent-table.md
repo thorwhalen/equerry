@@ -61,6 +61,8 @@ An item whose options span classes is routed by its strictest option, and each o
 | merge a PR in a client's or upstream repository | `merge_outside_orgs` (`merge_pr`, owner not in `own_orgs`) | `ask_first` | shown |
 | upload a release to a package index | `publish` (`release`) | `ask_first` | shown, one-way |
 | post a reply in a chat with a collaborator | `message_person` (`send_message`) | `ask_first` | shown; voice may not approve it |
+| comment on an issue in an own-org private repository | `reversible` (`comment_own`, visibility private or internal) | `allowed` | `auto` if the representative says low |
+| comment on an issue in an own-org public repository | `message_person` (`comment_public`; also when the caller does not pass the visibility) | `ask_first` | shown |
 | add an API token to CI | `secret_or_account_change` (`set_secret`) | `off` | shown as a by-hand request |
 | admit a team's new sub-agent | `create_agent_primitive` (`admit_primitive`) | `allowed` | `auto`: the session admits and logs it; the brief lists it |
 | a team letter with `publish: off` raises a release | `publish` | `off` (letter) | shown as a by-hand request |
