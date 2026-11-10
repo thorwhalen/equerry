@@ -91,6 +91,7 @@
         "coverage": { "enum": ["direct", "adjacent", "none"] },
         "reason": { "type": "string" },
         "instead": { "type": "string", "description": "What the principal would likely say instead." },
+        "settle": { "type": "string", "description": "The one question to the principal that would settle the verdict; most useful on a medium risk." },
         "sources": { "type": "array", "items": { "type": "string" }, "description": "Record lines the reason cites." },
         "by": { "type": "string" },
         "at": { "type": "string", "format": "date-time" }

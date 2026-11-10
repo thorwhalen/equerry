@@ -31,7 +31,7 @@ Writers: **raiser** (the producer that submitted it), **store** (the desk's writ
 | `action_class` | consent class | no | gate, by rule | `create_agent_primitive` (see [consent-table.md](consent-table.md)) |
 | `reversibility` | `two_way` `one_way` `unknown` | no | gate, by rule | `two_way` |
 | `route` | `auto` `shown` `logged` | no | gate | `shown` |
-| `predicted_objection` | `{risk, coverage, reason, instead, sources[], by, at}` | no | rep only | `{risk: "low", coverage: "adjacent", …}` |
+| `predicted_objection` | `{risk, coverage, reason, instead, settle, sources[], by, at}` | no | rep only | `{risk: "low", coverage: "adjacent", …}` |
 | `review` | `[{concern, severity, summary, ref, by}]` | no | reviewer | one entry per manager finding, by reference |
 | `raised_by` | actor id | yes | raiser | `session:release-bot`, `meta-judge`, `tick`, `adapter:openloops` |
 | `owner` | actor id | no (`principal`) | raiser; a delegation later | `principal` |
