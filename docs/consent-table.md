@@ -43,8 +43,8 @@ A team's engagement letter ([teams.md](teams.md)) may carry a `consent:` map in 
 
 ## How the gate reads the table
 
-1. **Classify.** Take the item's `action_request` (or, for an option, the option's action) and run the `classify` rules in order; the first match gives `action_class` and its rule id. No match: `unknown`. Facts about the target that a rule tests (a repository's `owner` and `visibility`) are resolved by the gate from the forge, lowercased, and overwrite what the raiser wrote in `args`: the raiser's text never decides its own class. A `when` over a missing fact is false, so each action's last, unconditioned rule must be its strictest class.
-2. **Look up.** The class default, then the most specific matching rule from `rules`.
+1. **Classify.** Take the item's `action_request` (or, for an option, the option's action) and run the `classify` rules in order; the first match gives `action_class` and its rule id. No match: `unknown`. Facts about the target that a rule tests (a repository's `owner`, `repo` and `visibility`) are resolved by the gate from the forge, lowercased, and overwrite what the raiser wrote in `args`: the raiser's text never decides its own class. A `when` over a missing fact is false, so each action's last, unconditioned rule must be its strictest class.
+2. **Look up.** The class default, then the most specific matching rule from `rules`. A rule that narrows (a stricter setting than the default) applies when a fact its match needs could not be resolved; a rule that widens does not.
 3. **Narrow.** Apply the team letter's `consent:` entry for that class, if the item came from a team, and any other narrowing layer; keep the strictest.
 4. **Set reversibility.** `two_way` for `reversible`, `one_way` for the gated classes unless a rule says the target has a recovery window, `unknown` for `unknown`.
 5. **Route.** `off`: shown as a by-hand request, `accept` removed. `ask_first`: shown. `allowed`: ask the representative; `auto` on low risk with direct or adjacent coverage, otherwise shown. An item with no action to take and nothing to decide may be `logged` under tolerance.

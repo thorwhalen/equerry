@@ -36,7 +36,7 @@ classes:
 
 # Classification: which action is which class. First match wins; the gate logs the id.
 # `action` matches the item's action_request.action; `when` is an optional condition on
-# its args, evaluated by code, never by a model. The gate resolves `owner` and
+# its args, evaluated by code, never by a model. The gate resolves `owner`, `repo` and
 # `visibility` from the forge (lowercased), never from what the raiser wrote. A `when`
 # over a missing value is false, so each action's last, unconditioned rule is its strictest.
 classify:
@@ -50,7 +50,7 @@ classify:
   - {id: send_message,      action: send_message,      class: message_person}
   - {id: comment_outside,   action: comment,           when: "args.owner not in own_orgs",    class: message_person}
   - {id: comment_own,       action: comment,           when: "args.visibility in ['private', 'internal']", class: reversible}
-  - {id: comment_public,    action: comment,           class: message_person}   # an own repository with outside readers, or visibility not given
+  - {id: comment_public,    action: comment,           class: message_person}   # an own repository with outside readers, or visibility not resolved
   - {id: delete,            action: delete,            class: delete}
   - {id: pay,               action: pay,               class: spend}
   - {id: set_secret,        action: set_secret,        class: secret_or_account_change}
@@ -58,8 +58,8 @@ classify:
   - {id: admit_primitive,   action: admit_primitive,   class: create_agent_primitive}
   - {id: widen_permission,  action: grant_permission,  class: grant_permission}
   - {id: create_job,        action: schedule_job,      class: schedule}
-  - {id: dossier_read,      action: read_field,        when: "args.label in ['amber', 'red']", class: read_sensitive_field}
-  - {id: dossier_read_open, action: read_field,        class: reversible}
+  - {id: dossier_read_open, action: read_field,        when: "args.label in ['green', 'clear']", class: reversible}
+  - {id: dossier_read,      action: read_field,        class: read_sensitive_field}   # amber, red, or no label
 
 # Your saved, revocable rules. Each narrows or widens one class for what it matches.
 # The most specific match wins; a tie keeps the stricter. Revoke by deleting the entry
@@ -75,7 +75,7 @@ rules: []
 #    note: documentation builds of my own packages may go out without asking
 #  - id: shared-private-repo
 #    class: reversible
-#    match: "args.action == 'comment' and args.repo == '<owner/repo shared with a client>'"
+#    match: "args.repo == '<owner/repo shared with a client>'"
 #    setting: ask_first
 #    added: 2026-11-10
 #    by: principal
