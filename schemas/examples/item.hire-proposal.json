@@ -29,6 +29,7 @@
     "coverage": "adjacent",
     "reason": "Prefers checklists over new skills when a reference line would do.",
     "instead": "Make it a checklist item in the existing legal skill.",
+    "settle": "Would one checklist line in the existing legal skill do?",
     "sources": ["views.md#small-primitives"],
     "by": "representative",
     "at": "2026-11-09T14:03:10Z"

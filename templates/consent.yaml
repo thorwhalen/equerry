@@ -36,15 +36,17 @@ classes:
 
 # Classification: which action is which class. First match wins; the gate logs the id.
 # `action` matches the item's action_request.action; `when` is an optional condition on
-# its args, evaluated by code, never by a model.
+# its args, evaluated by code, never by a model. The gate resolves `owner` and
+# `visibility` from the forge (lowercased), never from what the raiser wrote. A `when`
+# over a missing value is false, so each action's last, unconditioned rule is its strictest.
 classify:
   - {id: open_pr,           action: open_pr,           class: reversible}
   - {id: commit_branch,     action: commit,            when: "args.branch != default_branch", class: reversible}
   - {id: merge_pr_own,      action: merge_pr,          when: "args.owner in own_orgs",        class: reversible}
   - {id: merge_pr,          action: merge_pr,          class: merge_outside_orgs}
   - {id: release,           action: release,           class: publish}
-  - {id: publish_page,      action: publish_page,      when: "args.visibility == 'public'",   class: publish}
-  - {id: publish_private,   action: publish_page,      class: reversible}
+  - {id: publish_private,   action: publish_page,      when: "args.visibility in ['private', 'internal']", class: reversible}
+  - {id: publish_page,      action: publish_page,      class: publish}   # public, or visibility not resolved
   - {id: send_message,      action: send_message,      class: message_person}
   - {id: comment_outside,   action: comment,           when: "args.owner not in own_orgs",    class: message_person}
   - {id: comment_own,       action: comment,           when: "args.visibility in ['private', 'internal']", class: reversible}
@@ -71,6 +73,13 @@ rules: []
 #    by: principal
 #    review_by: 2027-05-01
 #    note: documentation builds of my own packages may go out without asking
+#  - id: shared-private-repo
+#    class: reversible
+#    match: "args.action == 'comment' and args.repo == '<owner/repo shared with a client>'"
+#    setting: ask_first
+#    added: 2026-11-10
+#    by: principal
+#    note: private, but a client reads it; comment_own uses visibility as a proxy for outside readers
 #  - id: no-outbound-to-a-client
 #    class: message_person
 #    match: "args.recipient == '<a person or org id>'"

@@ -43,7 +43,7 @@ A team's engagement letter ([teams.md](teams.md)) may carry a `consent:` map in 
 
 ## How the gate reads the table
 
-1. **Classify.** Take the item's `action_request` (or, for an option, the option's action) and run the `classify` rules in order; the first match gives `action_class` and its rule id. No match: `unknown`.
+1. **Classify.** Take the item's `action_request` (or, for an option, the option's action) and run the `classify` rules in order; the first match gives `action_class` and its rule id. No match: `unknown`. Facts about the target that a rule tests (a repository's `owner` and `visibility`) are resolved by the gate from the forge, lowercased, and overwrite what the raiser wrote in `args`: the raiser's text never decides its own class. A `when` over a missing fact is false, so each action's last, unconditioned rule must be its strictest class.
 2. **Look up.** The class default, then the most specific matching rule from `rules`.
 3. **Narrow.** Apply the team letter's `consent:` entry for that class, if the item came from a team, and any other narrowing layer; keep the strictest.
 4. **Set reversibility.** `two_way` for `reversible`, `one_way` for the gated classes unless a rule says the target has a recovery window, `unknown` for `unknown`.
@@ -62,7 +62,7 @@ An item whose options span classes is routed by its strictest option, and each o
 | upload a release to a package index | `publish` (`release`) | `ask_first` | shown, one-way |
 | post a reply in a chat with a collaborator | `message_person` (`send_message`) | `ask_first` | shown; voice may not approve it |
 | comment on an issue in an own-org private repository | `reversible` (`comment_own`, visibility private or internal) | `allowed` | `auto` if the representative says low |
-| comment on an issue in an own-org public repository | `message_person` (`comment_public`; also when the caller does not pass the visibility) | `ask_first` | shown |
+| comment on an issue in an own-org public repository | `message_person` (`comment_public`; also when the visibility could not be resolved) | `ask_first` | shown |
 | add an API token to CI | `secret_or_account_change` (`set_secret`) | `off` | shown as a by-hand request |
 | admit a team's new sub-agent | `create_agent_primitive` (`admit_primitive`) | `allowed` | `auto`: the session admits and logs it; the brief lists it |
 | a team letter with `publish: off` raises a release | `publish` | `off` (letter) | shown as a by-hand request |
