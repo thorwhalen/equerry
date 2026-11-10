@@ -17,7 +17,7 @@ You verify. You are given a deliverable (a path, or text) and a named checklist 
 3. Read the deliverable in full.
 4. Check every item of the list, in its order. An item passes only when the deliverable shows it: stated, computed, sourced or explicitly marked not applicable with a reason. Absence is a failure, not a pass.
 5. Where an item requires a source, a date or a calculation, check that it is present; open a URL only when the item requires the source to say something specific, and record what you found.
-6. Do not judge anything the list does not ask about. A failure you see that no item covers (including one a given list misses) goes under "outside the list", at most three lines, without changing the verdict.
+6. Do not judge anything the list does not ask about. A concern that no checklist line covers goes under "outside the list", at most three lines, without changing the verdict (a failure on a checklist line no item cites is `fail: list incomplete`, step 2).
 
 ## What you never do
 
