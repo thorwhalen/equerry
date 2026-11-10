@@ -61,7 +61,7 @@ One line per ask, written by the calling session at step 10 (when the verdict, t
 | `ask` | the framed ask, one line, neutral |
 | `verdict` | `covered`, `covered-with-gaps`, `train`, `hire`, `escalate` |
 | `procedure` | evidence that the team knows the steps: the primitive, or `none` |
-| `quality` | a list, one entry per check that ran at step 7, with its last round's numbers: `{"check": <what ran, against which checklist or test>, "pass": <items passed>, "total": <items checked>}`. The work is unverified when an entry has `pass` below `total` after the second round; contradictor only is `[{"check": "contradictor", "pass": null, "total": null}]`; `[]` for an `escalate` |
+| `quality` | a list, one entry per check that ran at step 7, with its last round's numbers: `{"check": <what ran, against which checklist or test>, "pass": <items passed>, "total": <items checked>, "items": <for a checker, the path of the item list every round was scored against>}`. The work is unverified when an entry has `pass` below `total` after the second round; contradictor only is `[{"check": "contradictor", "pass": null, "total": null}]`; `[]` for an `escalate` |
 | `knowledge` | the references used, their dates and jurisdictions; what was stale or missing |
 | `context` | the dossier fields and venture pages needed; present or missing |
 | `authority` | the letter's right that applied (may decide, recommends, agree, never) and whether the escalation line was crossed |
