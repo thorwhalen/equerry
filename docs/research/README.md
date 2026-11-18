@@ -15,3 +15,8 @@ Reports are written for the agents and people who build equerry. Each one starts
 | [operator-dossier-and-resource-store.md](operator-dossier-and-resource-store.md) | Facts and resources about the principal, tiered, so agents stop asking: schema, retrieval contract, where it lives. | 2026-11-09 |
 | [domain-experts-for-a-solo-technical-founder.md](domain-experts-for-a-solo-technical-founder.md) | Which teams a portfolio founder needs, what each expert does month to month, where a licensed professional takes over. | 2026-11-09 |
 | [synthesis.md](synthesis.md) | What the build takes from all of the above, and where the reports disagree. | 2026-11-09 |
+| [principal-decision-policies.md](principal-decision-policies.md) | How one standing decision (intent, bounds, break conditions) settles many concrete ones, and how agents find and audit such policies. | 2026-11-18 |
+| [communicating-with-the-principal.md](communicating-with-the-principal.md) | Decisions in the reader's own vocabulary: framing the problem not the options, a per-reader lexicon, one record with two layers and several renderings. | 2026-11-18 |
+| [decision-saturation.md](decision-saturation.md) | When the human approves blindly: how to measure it (canaries, telemetry) and design against it (budgets, value of asking, autonomy per class). | 2026-11-18 |
+| [learning-the-principals-meta-preferences.md](learning-the-principals-meta-preferences.md) | Learning trade-offs and meta-preferences: axes with floors, induced principles confirmed on cards, an adaptive interview, shadow-mode evaluation. | 2026-11-18 |
+| [learning-how-the-principal-thinks.md](learning-how-the-principal-thinks.md) | Synthesis of the four above: what to build and seven pilots, in order. | 2026-11-18 |
