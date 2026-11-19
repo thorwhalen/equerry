@@ -167,7 +167,7 @@ Growth is never a desk item: a new or changed primitive, or a lead's new tools, 
 
 ## Cost and cadence
 
-- **Token pacing, not budgets.** Every coverage and growth line carries `cost` (`agent_calls` you made for it: lead, checker, contradictor, navigator, G4 runs; `tokens` when the host reports them, else `null`). No team has a budget: the secretary's brief reports the week's use against the weekly allowance, and the principal paces. Before a growth step that is large in tokens, say its cost (G0).
+- **Token pacing, not budgets.** Every coverage and growth line carries `cost` (`agent_calls` you made for it: lead, checker, contradictor, navigator, G4 runs; `tokens` when the host reports them, else `null`). No team has a budget: the bosun's brief reports the week's use against the weekly allowance, and the principal paces. Before a growth step that is large in tokens, say its cost (G0).
 - **A small library.** No cap, but G1 prefers training or merging an existing skill once a team has two or three active ones, and the team review prunes what goes unused (`references/gate.md`).
 - One lead call per ask for `covered` and `escalate`; at most three (assess, work, distil) for a gap.
 - **Cadence needs a trigger.** A row of the letter's deliverables table runs on its cadence only when its `Trigger` names something that fires (a scheduled routine, or a reminder in the host's obligation tracker). Without one the row says `on ask` and promises nothing. A tracker reminder is a desk item you may file; a scheduled routine is the consent table's `schedule` class. Each triggered run is an ask like any other, with a coverage line.

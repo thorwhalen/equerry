@@ -10,7 +10,7 @@ An equerry is the officer who manages a sovereign's day. This one manages yours 
 
 | Role | What it does | Shape |
 |---|---|---|
-| Chief of staff (the secretary) | the one agent the principal talks to; relays, never performs | an agent with read tools and a proposal channel |
+| Bosun (chief of staff) | the one agent the principal talks to; relays the fleet's state and open loops and passes the principal's orders to the crew; never does the work itself | an agent with read tools and a proposal channel |
 | Representative | rates a recommendation's disagreement risk against the principal's recorded positions, with the reason | a reader over a sourced record; a verdict schema |
 | Managers by concern | design, architecture, privacy, business, people, marketing: each reviews with a checklist, fresh context, read-only | one strong model, N checklists; opinions in one schema |
 | Meta-judge | collapses findings into exception items, under a daily cap | a brief |
@@ -19,6 +19,8 @@ An equerry is the officer who manages a sovereign's day. This one manages yours 
 | Reminders | intent + trigger policy + channel policy + escalation; timing inferred when not given | a store and a scheduler |
 | Memory | every verdict and override logged; the record learns from corrections, not from re-mining | an append-only log and a reviewed consolidation |
 | Gate | act without the principal only when the action is reversible by rule AND the representative says low risk | one rule |
+
+**The bosun.** On a ship the bosun passes the captain's orders to the crew and reports back; here it is the agent the principal talks to, by text or voice, for two things: what the fleet is doing (sessions, open loops, what needs them) and carrying their orders to the sessions that do the work. It dispatches; it never does the work itself. Older documents and some identifiers (the `equerry-secretary` skill, `raised_by: secretary`) still say *secretary*; both words mean this role.
 
 The design is in [docs/architecture.md](docs/architecture.md). The research that led to it is in [docs/research/](docs/research/README.md).
 
@@ -39,7 +41,7 @@ Domain work (legal, finance, people, bizdev, marketing, product, engineering, ve
 | Agents | `<team>-lead` | the eight leads; default tools Read, Grep, Glob, WebSearch and WebFetch: no shell, no write tool, so the calling session runs every command and writes every file (it may give a lead more for one ask) |
 | Agents | `contradictor`, `checker`, `navigator` | shared staff: find what does not hold; verify against a checklist; know which tools already exist |
 
-A host turns teams on with a `## equerry` block in its `CLAUDE.md`: six lines (where letters, logs, the dossier, venture pages, the navigator and the desk live) plus an optional `Fleet map:` line for the navigator; the secretary adds `Brief sources:` and `Briefs:`. See `docs/teams.md`, "Seams". The leads are registered agents when the session starts in the host directory, whose `.claude/agents/` links to this repository's; from anywhere else the calling session inlines them (`equerry-team`).
+A host turns teams on with a `## equerry` block in its `CLAUDE.md`: six lines (where letters, logs, the dossier, venture pages, the navigator and the desk live) plus an optional `Fleet map:` line for the navigator; the bosun adds `Brief sources:` and `Briefs:`. See `docs/teams.md`, "Seams". The leads are registered agents when the session starts in the host directory, whose `.claude/agents/` links to this repository's; from anywhere else the calling session inlines them (`equerry-team`).
 
 ## Relation to its siblings
 

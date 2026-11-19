@@ -1,6 +1,6 @@
 # Cross-domain events
 
-Some asks are events that touch several teams at once. Small companies handle them with one named owner per item (the "directly responsible individual") and a checklist per recurring event. Here the **secretary is the DRI** (in a host without one, the calling session is): it opens one item per team touched, each with its team's lines, and closes the event when every item is closed. Teams do not message each other; the DRI carries what one team needs from another.
+Some asks are events that touch several teams at once. Small companies handle them with one named owner per item (the "directly responsible individual") and a checklist per recurring event. Here the **bosun is the DRI** (in a host without one, the calling session is): it opens one item per team touched, each with its team's lines, and closes the event when every item is closed. Teams do not message each other; the DRI carries what one team needs from another.
 
 How to run one: name the event and its date; copy the event's checklist below; give each line to the team in brackets as an ask through `equerry-team` (one coverage line per team); collect the results under one heading in the brief; close the event when the last item closes.
 

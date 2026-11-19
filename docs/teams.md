@@ -166,7 +166,7 @@ All five are lines in one block of the host's `CLAUDE.md`, so a host configures 
 | Chart role ([architecture.md](architecture.md)) | Its relation to the teams |
 |---|---|
 | Principal | decides every Recommend and every action the consent table marks `ask_first`; reads in the brief what the teams added |
-| Secretary (chief of staff) | the front door: routes an ask to a team or to the council, is the directly responsible individual for cross-domain items (a launch, a new client, a fundraise opens one item per team), puts team packs and escalations into the brief; never performs |
+| Bosun (chief of staff) | the front door: routes an ask to a team or to the council, is the directly responsible individual for cross-domain items (a launch, a new client, a fundraise opens one item per team), puts team packs and escalations into the brief; never performs |
 | Representative | annotates every team recommendation that reaches the desk with the principal's predicted objection |
 | Managers by concern | a lead in review mode is the manager for its concern (legal for privacy-legal, marketing, bizdev and ventures for business, people, engineering for architecture), with its domain checklist and the chart's one opinion schema |
 | Meta-judge | collapses team findings into exception items under the daily cap |
@@ -197,7 +197,7 @@ Each lead's reply has one shape: the coverage block, then **my view**, **what bo
 
 - No Python package and no code tonight; nothing a skill and a file can do.
 - No standing session per team: a lead is called on demand; a dedicated session is spawned only when a thread with one team runs long.
-- No team-to-team messaging: cross-domain work goes through the secretary or the council.
+- No team-to-team messaging: cross-domain work goes through the bosun or the council.
 - No approval step and no budget for the organisation's own growth (Lean, above); no self-editing check: a lead never edits the checks or writes its own eval cases.
 - No fine-tuning, ever; no automatic merge-and-prune; re-validation only from the first model change.
 - No compliance-calendar engine: dates are data in the legal and finance references until reminders exist.

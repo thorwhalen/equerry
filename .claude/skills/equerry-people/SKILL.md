@@ -59,7 +59,7 @@ The public acquaint package holds records of people, including the principal's o
 
 ## Cross-domain events that touch people
 
-The secretary is the directly responsible individual for each event, which opens one item per team. People's item in each event is the lines tagged `[people]` in `equerry-team/references/cross-domain-events.md`, the only copy of those checklists (source numbers there are the same as in this skill's `references/sources.md`).
+The bosun is the directly responsible individual for each event, which opens one item per team. People's item in each event is the lines tagged `[people]` in `equerry-team/references/cross-domain-events.md`, the only copy of those checklists (source numbers there are the same as in this skill's `references/sources.md`).
 
 ## Review-mode checklist
 

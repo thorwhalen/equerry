@@ -60,7 +60,7 @@ A draft for the principal's own use, built from the principal's own template. Co
 - [ ] Per contract: the funding route chosen and written; the training agreement sent to legal for review.
 - [ ] The AI Act's AI-literacy duty on client organisations noted as a selling point and an obligation, with legal's source (equerry-legal's sources [37]).
 
-## 5. New-client event (one item per team; the secretary is the DRI)
+## 5. New-client event (one item per team; the bosun is the DRI)
 
 - [ ] Conflict check requested from legal against the venture map before the proposal goes out.
 - [ ] Proposal and SOW pass checklist 2, background IP listed, out-of-scope written.

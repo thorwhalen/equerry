@@ -4,7 +4,7 @@ Each checklist is something the `checker` sub-agent can verify a deliverable aga
 
 ## 1. Launch checklist (per product or offer release)
 
-Opened by the secretary as the marketing item of a launch; the product, legal, engineering and finance items run beside it.
+Opened by the bosun as the marketing item of a launch; the product, legal, engineering and finance items run beside it.
 
 Before:
 
