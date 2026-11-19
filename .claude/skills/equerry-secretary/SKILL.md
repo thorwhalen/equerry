@@ -1,6 +1,6 @@
 ---
 name: equerry-secretary
-description: "The principal's bosun (also called the secretary), on demand: compose a short, ranked, capped brief of what needs them from the host's named sources (live sessions, obligations, code-hosting notifications, venture pages, team logs, desk items, token usage), with what the teams added and the week's token pacing, capture a reminder as a desk item, and route an ask to a team. Use on 'bosun', 'ask the bosun', 'secretary', 'brief me', 'what needs me', 'morning brief', 'evening brief', 'catch me up', 'anything for me', 'remind me of X', 'remind me to X tomorrow', 'don't let me forget X', 'ask <team> to', 'have legal/finance/... look at', and whenever a scheduler runs the brief job. Reads and proposes; never does the work, never closes an obligation, never pushes a notification."
+description: "The principal's bosun (also called the secretary), on demand: compose a short, ranked, capped brief of what needs them from the host's named sources (live sessions, obligations, code-hosting notifications, venture pages, team logs, desk items, token usage), with what the teams added and the week's token pacing, capture a reminder as a desk item, and route an ask to a team. Use on 'bosun', 'ask the bosun', 'secretary', 'brief me', 'what needs me', 'morning brief', 'evening brief', 'catch me up', 'anything for me', 'remind me of X', 'remind me to X tomorrow', 'don't let me forget X', 'ask <team> to', 'have legal/finance/... look at', and whenever a scheduler runs the brief job. Reads and proposes; never does the work, never closes an obligation, never pushes a notification itself (a reminder with a stated time is handed to `ol remind`, which pushes at that time)."
 metadata: {equerry: {team: all, class: mechanic, origin: human, origin_ask: "docs/research/synthesis.md (the secretary, concretely)", version: "2", status: active}}
 ---
 
@@ -151,17 +151,25 @@ Taps come back by the route step 7 named (comments on the published brief, or a 
 ## (b) "Remind me of X"
 
 1. Parse the trigger: an explicit time ("tomorrow 9", "Friday", "in two hours") becomes an absolute time in the dossier's zone (or the assumed one, said in the echo); an event ("when session X finishes", "when the PR merges") is recorded as the event; no trigger stated means **next brief**.
-2. File a desk item: an issue labelled `manual-task` in the `Desk:` repository, title `Remind: <X, verb first>`, body:
+2. **A stated time: hand it to openloops** (the `openloops-remind` skill; openloops ADR-013, decided 2026-11-19). It pushes to the principal's phone at that time, even with the Mac asleep:
+
+   ```bash
+   ol remind "<X, verb first>" --when <duration or ISO time> --source bosun
+   ```
+
+   Add `--reveal` only when the title is a short label with no person's name, client, money or secret (ntfy.sh is a public relay; without it the push says only that a reminder is due). Repeat the line it prints, word for word, as the echo.
+3. **An event, or no trigger: file a desk item** (openloops has no event triggers yet, and the brief reads these): an issue labelled `manual-task` in the `Desk:` repository, title `Remind: <X, verb first>`, body:
 
    ```markdown
    **Said:** "<the principal's words, verbatim>" (<time, zone>)
-   **Trigger:** <absolute time with zone | event | next brief>
+   **Trigger:** <event | next brief>
    **Why it matters:** <one line, only if the principal said it>
    **Verify:** none possible: a reminder; close by hand once done.
    ```
-3. Echo back in one line what was understood: `Will remind you: <X> — <trigger in words>.` If the trigger or the object was ambiguous, the echo says which reading you took, so a one-word correction fixes it.
 
-Never push a notification, never schedule a job: the brief whose window contains the trigger time shows the reminder under "Needs you" (class `deadline`) or "Know". A reminder due with no brief scheduled before it is said in the echo ("no brief runs before then; ask me for one, or say when").
+   Echo back in one line what was understood: `Will remind you: <X> — <trigger in words>.` If the trigger or the object was ambiguous, the echo says which reading you took, so a one-word correction fixes it. The brief whose window contains the trigger shows it under "Needs you" (class `deadline`) or "Know"; a reminder with no brief before it says so in the echo.
+
+Never push a notification yourself, and never schedule a job: a timed push is `ol remind`'s, at the principal's stated time only.
 
 ## (c) "Ask <team> to …"
 
