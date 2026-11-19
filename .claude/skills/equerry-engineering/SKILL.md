@@ -90,7 +90,7 @@ A consult is not an escalation: the lead writes `Consult: <team>: <question>` af
 
 ## Cross-domain events that touch engineering
 
-The secretary is the directly responsible individual for each event, which opens one item per team. Engineering's item in each event is the lines tagged `[engineering]` in `equerry-team/references/cross-domain-events.md`, the only copy of those checklists (source numbers there are the same as in this skill's `references/sources.md`).
+The bosun is the directly responsible individual for each event, which opens one item per team. Engineering's item in each event is the lines tagged `[engineering]` in `equerry-team/references/cross-domain-events.md`, the only copy of those checklists (source numbers there are the same as in this skill's `references/sources.md`).
 
 ## Review-mode checklist (engineering concern)
 

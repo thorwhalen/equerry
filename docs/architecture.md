@@ -11,7 +11,7 @@ The sibling tools already cover most roles (watching live sessions, obligations 
 | Role | Plays it | Contract |
 |---|---|---|
 | Principal (CEO) | the person | decides one-way doors; reads exception items and briefs only |
-| Chief of staff (secretary) | one long-lived agent with read tools over the fleet and a proposal channel; it relays, never performs | input: the principal's words (text; voice is an adapter); output: answers, proposals the principal confirms, dispatches to workers |
+| Bosun (chief of staff) | one long-lived agent with read tools over the fleet and a proposal channel; it relays the fleet's state and open loops and passes the principal's orders to the crew; never does the work itself | input: the principal's words (text; voice is an adapter); output: answers, proposals the principal confirms, dispatches to workers |
 | Representative | a reader over the principal's sourced record of positions | input: an item with a recommendation; output: `risk ∈ {low, medium, high}`, reason citing a record line, what the principal would say instead, coverage ∈ {direct, adjacent, none} |
 | Managers by concern | one strong reviewer model, one checklist per concern (design, architecture, privacy-legal, business, people, marketing), fresh context, read-only | input: a diff or a plan plus the checklist; output: findings in one opinion schema (severity, where, rule, fix) |
 | Meta-judge | collapses N findings into exception items per breached tolerance | output: exception items (what, which tolerance, impact, options, recommendation, predicted objection) under a daily cap |

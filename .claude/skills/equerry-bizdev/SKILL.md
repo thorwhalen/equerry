@@ -59,7 +59,7 @@ Crossing the line turns the deliverable into the brief; the lead does not answer
 
 ## Cross-domain events that touch bizdev
 
-The secretary is the directly responsible individual for each event, which opens one item per team. Bizdev's item in each event is the lines tagged `[bizdev]` in `equerry-team/references/cross-domain-events.md`, the only copy of those checklists (source numbers there are the same as in this skill's `references/sources.md`).
+The bosun is the directly responsible individual for each event, which opens one item per team. Bizdev's item in each event is the lines tagged `[bizdev]` in `equerry-team/references/cross-domain-events.md`, the only copy of those checklists (source numbers there are the same as in this skill's `references/sources.md`).
 
 ## Review-mode checklist (business concern)
 

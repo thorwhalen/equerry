@@ -57,7 +57,7 @@ On crossing the line the deliverable is the brief, filed as an `escalate` desk i
 
 ## Cross-domain events that touch ventures
 
-The secretary is the directly responsible individual for each event, which opens one item per team. Ventures's item in each event is the lines tagged `[ventures]` in `equerry-team/references/cross-domain-events.md`, the only copy of those checklists (source numbers there are the same as in this skill's `references/sources.md`).
+The bosun is the directly responsible individual for each event, which opens one item per team. Ventures's item in each event is the lines tagged `[ventures]` in `equerry-team/references/cross-domain-events.md`, the only copy of those checklists (source numbers there are the same as in this skill's `references/sources.md`).
 
 ## Review-mode checklist
 
