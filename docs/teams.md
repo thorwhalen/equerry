@@ -138,7 +138,7 @@ Logs are data, not design: they live in the records root, never in a code reposi
 
 | # | Seam | v1 default (no new dependency) | Replacement you can point at |
 |---|---|---|---|
-| 1 | where a team's instance lives (letter, roster, private references, admitted instance primitives) | `teams/` in the host repository, named by a `Teams:` line in the host's `CLAUDE.md` | a scaffold-generated client workspace's private folder; the principal's private companion repository |
+| 1 | where a team's instance lives (letter, roster, private references, admitted instance primitives) | `teams/` in the host repository, named by a `Teams:` line in the host's `CLAUDE.md` | a generated workspace's private folder; the principal's private companion repository |
 | 2 | where the logs live | the data root `~/.local/share/equerry/teams/<team>/` (logs are data, never in a code repository) | a synced management-data repository, or blob storage, named by the `Team records:` line |
 | 3 | how the roster is produced | edited by the distil step | generated from `metadata.equerry` frontmatter by `opsward` (issue to be filed) |
 | 4 | where facts about the principal come from | a facts file named by a `Dossier:` line, read whole only while it holds nothing above `green` (the session checks the labels before passing the path) | `acquaint`'s field-level read verb with purpose and audience (issue to be filed) |
@@ -193,6 +193,16 @@ Each lead's reply has one shape: the coverage block, then **my view**, **what bo
 | navigator | the sub-agent that knows which tools already exist |
 | records root | where the logs live |
 
+## A principal who is not a developer
+
+The same mechanics serve a principal who runs a small business rather than a software fleet, when a workspace generator deploys them. Five things differ, all instance choices, none a change to the core:
+
+- **Which teams.** Not all eight. The principal names three to five advisers in an intake interview run in their own chat assistant, each with one line on what it watches over, in their own words. Each becomes a team whose letter takes that line as its mission; the eight domains are the vocabulary those names are mapped onto, not a quota, and a specialist of the principal's own field is a valid team. The contradictor is always added.
+- **The dossier's first facts** come from the same interview's setup sheet: what the principal wrote and confirmed before sending it, labelled before any lead reads it (seam 4).
+- **Growth keeps a gate.** A principal who cannot read a diff approves each change to their setup: the session proposes, the principal validates, and the change is logged with its reason. Lean (above) drops that step for a principal who can review the work; the generator keeps it.
+- **Chat and phone come first.** Surface 5 is the main one: leads that need no files and no shell travel as portable skills to the principal's chat assistant, and the rest stay in the workspace.
+- **No bosun at first.** One workspace is not a fleet; a weekly review of the friction log does the bosun's reporting until there are several sessions to watch.
+
 ## Deliberately not built
 
 - No Python package and no code tonight; nothing a skill and a file can do.
@@ -202,4 +212,4 @@ Each lead's reply has one shape: the coverage block, then **my view**, **what bo
 - No fine-tuning, ever; no automatic merge-and-prune; re-validation only from the first model change.
 - No compliance-calendar engine: dates are data in the legal and finance references until reminders exist.
 - No dossier fields above `green` until the read verb enforces labels in code.
-- No scaffold here: generating a client's workspace stays with the consulting kit that already does it, which will render these mechanics.
+- No scaffold here: a workspace generator outside this repository renders these mechanics.
