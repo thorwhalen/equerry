@@ -108,6 +108,7 @@ Conductor (macOS app), Claude Squad (terminal UI, AGPL-3.0) and Vibe Kanban (kan
   - **Channels** (research preview): an MCP server pushes events (Telegram, Discord, iMessage, webhooks) into an *already running* Claude Code session; each channel keeps a sender allowlist bootstrapped by a pairing code; a channel may relay permission prompts, and "anyone who can reply through the channel can approve or deny tool use in your session" [42].
   - **Scheduled tasks** (formerly routines; research preview): saved cloud sessions fired by schedule, HTTP API or GitHub event, pushing to `claude/` branches, starting in auto mode, capped at 100 scheduled runs per hour per account [43]. A fired prompt "is therefore not live user input and can't act as approval or consent for actions during the run" [43].
   - **Agent teams** (section 3.3).
+  - **Claude Duet** (research preview since 2026-10-21, after this report): a proactive agent app with a morning brief and approvals, on one account; see [claude-duet.md](claude-duet.md).
 - **Verdict.** Anthropic's primitives: **depend** (as transport and cadence, behind seams, because they are research previews). Everyone else: **study** as benchmarks. The vendor features churn fast (Pulse lived nine months), which argues against building on any assistant feature that is not the fleet's own.
 
 ## 5. Hand-built "Jarvis" and "chief of staff" front ends

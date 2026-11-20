@@ -20,3 +20,4 @@ Reports are written for the agents and people who build equerry. Each one starts
 | [decision-saturation.md](decision-saturation.md) | When the human approves blindly: how to measure it (canaries, telemetry) and design against it (budgets, value of asking, autonomy per class). | 2026-11-18 |
 | [learning-the-principals-meta-preferences.md](learning-the-principals-meta-preferences.md) | Learning trade-offs and meta-preferences: axes with floors, induced principles confirmed on cards, an adaptive interview, shadow-mode evaluation. | 2026-11-18 |
 | [learning-how-the-principal-thinks.md](learning-how-the-principal-thinks.md) | Synthesis of the four above: what to build and seven pilots, in order. | 2026-11-18 |
+| [claude-duet.md](claude-duet.md) | Anthropic's Claude Duet (proactive agent app): what it overlaps, how the layer integrates through its connector, and every surface that shapes it. | 2026-11-20 |

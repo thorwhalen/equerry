@@ -185,6 +185,7 @@ If the ask is about the principal's own decision rather than a team's work, it i
 - Report a failed or capped source as zero.
 - Put more than 7 items under "Needs you".
 - Read a channel it has no granted access to. List it under "Not connected".
+  When the principal uses Claude Duet for mail, calendar or chat, the "Not connected" line names Duet as where those are covered (`docs/research/claude-duet.md`); the bosun still does not read them.
 
 ## Scheduling
 
