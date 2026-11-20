@@ -41,7 +41,7 @@ Domain work (legal, finance, people, bizdev, marketing, product, engineering, ve
 | Agents | `<team>-lead` | the eight leads; default tools Read, Grep, Glob, WebSearch and WebFetch: no shell, no write tool, so the calling session runs every command and writes every file (it may give a lead more for one ask) |
 | Agents | `contradictor`, `checker`, `navigator` | shared staff: find what does not hold; verify against a checklist; know which tools already exist |
 
-A host turns teams on with a `## equerry` block in its `CLAUDE.md`: six lines (where letters, logs, the dossier, venture pages, the navigator and the desk live) plus an optional `Fleet map:` line for the navigator; the bosun adds `Brief sources:` and `Briefs:`. See `docs/teams.md`, "Seams". The leads are registered agents when the session starts in the host directory, whose `.claude/agents/` links to this repository's; from anywhere else the calling session inlines them (`equerry-team`).
+A host turns teams on with a `## equerry` block in its `CLAUDE.md`: six lines (where letters, logs, the dossier, venture pages, the navigator and the desk live) plus an optional `Fleet map:` line for the navigator; the bosun adds `Brief sources:` and `Briefs:`. See `docs/teams.md`, "Seams". The leads are registered agents when the session starts in the host directory, whose `.claude/agents/` links to this repository's; from anywhere else the calling session inlines them (`equerry-team`). For a principal who is not a developer (fewer teams, named in an intake interview; a gate on growth; chat first), see [docs/teams.md](docs/teams.md#a-principal-who-is-not-a-developer).
 
 ## Relation to its siblings
 
